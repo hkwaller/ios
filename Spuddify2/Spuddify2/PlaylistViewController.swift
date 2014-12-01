@@ -16,22 +16,16 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var searchButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)]
-        
+        super.viewDidLoad()        
 
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         var request = NSFetchRequest(entityName: "Songs")
         request.returnsObjectsAsFaults = false
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+
         var results = context.executeFetchRequest(request, error: nil)
         
         if results?.count > 0 {
@@ -92,6 +86,14 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             var context:NSManagedObjectContext = appDel.managedObjectContext!
         }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
+        
+        UIView.animateWithDuration(0.3, animations: {
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 2)
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

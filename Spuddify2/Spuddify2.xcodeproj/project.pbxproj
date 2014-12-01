@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31588C631A2C62D700EB1A02 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31588C621A2C62D700EB1A02 /* DataHandler.swift */; };
 		31621B7A1A29E16300038C44 /* PlayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */; };
 		31621B7B1A29E16300038C44 /* PlayCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */; };
 		31621B7C1A29E16300038C44 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B781A29E16300038C44 /* Song.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31588C621A2C62D700EB1A02 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayCellTableViewCell.swift; sourceTree = "<group>"; };
 		31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayCellTableViewCell.xib; sourceTree = "<group>"; };
 		31621B781A29E16300038C44 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */,
 				319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */,
 				319F1B8F1A2A81ED00F678B6 /* Playlist.swift */,
+				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
 				31621B781A29E16300038C44 /* Song.swift */,
 				31621B791A29E16300038C44 /* SwiftyJSON.swift */,
 				31CA11AD1A2381F80094F96E /* Images.xcassets */,
@@ -188,7 +191,7 @@
 				TargetAttributes = {
 					31CA119D1A2381F80094F96E = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 3PL9476NX4;
+						DevelopmentTeam = WEZMQH4X5P;
 					};
 					31CA11B51A2381F80094F96E = {
 						CreatedOnToolsVersion = 6.1;
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31CA11A91A2381F80094F96E /* PlaylistViewController.swift in Sources */,
+				31588C631A2C62D700EB1A02 /* DataHandler.swift in Sources */,
 				31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */,
 				31621B7F1A29E86B00038C44 /* SearchViewController.swift in Sources */,
 				31CA11A71A2381F80094F96E /* Spuddify2.xcdatamodeld in Sources */,
@@ -374,9 +378,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Spuddify2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -385,9 +391,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Spuddify2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -24,8 +24,7 @@ class PlayCellTableViewCell: UITableViewCell {
     
     func loadItem(#s: Song) {
         song.text = s.title
-        artist.text = s.title
+        artist.text = s.artist
         imgView.image = s.image
     }
-    
 }
