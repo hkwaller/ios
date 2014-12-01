@@ -141,13 +141,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let loadingView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))
         
-        loadingView.backgroundColor = UIColor(red: 189/255.0, green: 195/255.0, blue: 199/255.0, alpha: 0.7)
+        loadingView.backgroundColor = UIColor(red: 189/255.0, green: 195/255.0, blue: 199/255.0, alpha: 0.9)
         
         var label = UILabel(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
         
         label.center = CGPointMake(screenSize.width / 2, screenSize.height / 2)
         label.textAlignment = NSTextAlignment.Center
-        label.text = "Loading up some stuff for you bro!"
+        label.text = "Loading up some stuff for you, hang tight!"
         
         loadingView.addSubview(label)
         

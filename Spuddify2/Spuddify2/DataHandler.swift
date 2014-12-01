@@ -7,54 +7,40 @@
 //
 
 import Foundation
-
-protocol DataHandlerDelegate {
-    func apiResults(results: NSDictionary)
-    func coreResults(results: NSDictionary)
-}
+import CoreData
 
 class DataHandler {
-    
-    var delegate: DataHandlerDelegate?
+    var songs: [Song] = []
     
     init() {
         
     }
     
-    func searchItunesFor(searchTerm: String) {
+    func getCoreData(appDel: AppDelegate) {
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        var request = NSFetchRequest(entityName: "Songs")
+        request.returnsObjectsAsFaults = false
+        var results = context.executeFetchRequest(request, error: nil)
         
-        // The iTunes API wants multiple terms separated by + symbols, so replace spaces with + signs
-        let itunesSearchTerm = searchTerm.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-        
-        // Now escape anything else that isn't URL-friendly
-        if let escapedSearchTerm = itunesSearchTerm.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-            let urlPath = "http://itunes.apple.com/search?term=\(escapedSearchTerm)&media=software"
-            let url: NSURL = NSURL(string: urlPath)!
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
-                println("Task completed")
-                if(error != nil) {
-                    // If there is an error in the web request, print it to the console
-                    println(error.localizedDescription)
+        if results?.count > 0 {
+            for result: AnyObject in results! {
+                if let artist = result.valueForKey("artist") as? String {
+                    if let title = result.valueForKey("song") as? String {
+                        if let imgUrl = result.valueForKey("imgUrl") as? String {
+                            if let album = result.valueForKey("album") as? String {
+                                if let bigUrl = result.valueForKey("bigUrl") as? String {
+                                    if let previewUrl = result.valueForKey("previewUrl") as? String {
+                                        self.songs.append(Song(artist: artist, title: title, album: album, imgUrl: imgUrl, previewUrl: previewUrl, bigUrl: bigUrl))
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                var err: NSError?
-                
-                var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
-                if(err != nil) {
-                    // If there is an error parsing JSON, print it to the console
-                    println("JSON Error \(err!.localizedDescription)")
-                }
-                let results: NSArray = jsonResult["results"] as NSArray
-                
-                self.delegate?.apiResults(jsonResult)
-            })
-            
-            task.resume()
+            }
+        } else {
+            println("no results bitch")
         }
-    }
-    
-    func getCoreData() {
-    
     }
     
 }
