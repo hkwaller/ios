@@ -10,35 +10,51 @@ import UIKit
 import CoreData
 import AVFoundation
 
-class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShareDataDelegate {
     var songs: [Song] = []
     var playlist: [AVPlayerItem] = []
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var refreshControl:UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        self.songs = getCoreData()
+        
+        if songs.count == 0 { self.tableView.hidden = true }
 
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Getting songs again")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+        
+        searchButton.layer.cornerRadius = 30;
+        
+        var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
+        
+        tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
+    }
+    
+    func getCoreData() -> [Song] {
         var request = NSFetchRequest(entityName: "Songs")
         request.returnsObjectsAsFaults = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
 
         var results = context.executeFetchRequest(request, error: nil)
         
         if results?.count > 0 {
             for result: AnyObject in results! {
-                //var pass = result.password!!
                 if let artist = result.valueForKey("artist") as? String {
                     if let title = result.valueForKey("song") as? String {
                         if let imgUrl = result.valueForKey("imgUrl") as? String {
                             if let album = result.valueForKey("album") as? String {
                                 if let bigUrl = result.valueForKey("bigUrl") as? String {
                                     if let previewUrl = result.valueForKey("previewUrl") as? String {
-                                        songs.append(Song(artist: artist, title: title, album: album, imgUrl: imgUrl, previewUrl: previewUrl, bigUrl: bigUrl))
-                                        //playlist.append(AVPlayerItem(URL: NSURL(string: previewUrl)!))
+                                        self.songs.append(Song(artist: artist, title: title, album: album, imgUrl: imgUrl, previewUrl: previewUrl, bigUrl: bigUrl))
                                     }
                                 }
                             }
@@ -47,20 +63,11 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         } else {
-            println("no results bitch")
+            println("no results")
         }
-        
-        if songs.count == 0 { self.tableView.hidden = true }
-
-        
-        searchButton.layer.cornerRadius = 30;
-        
-        var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
-        
-        tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
-        //tableView.backgroundColor = UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)
-
+        return self.songs
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count;
     }
@@ -68,10 +75,9 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:PlayCellTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("customCell") as PlayCellTableViewCell
-        
         let song = songs[indexPath.row]
         
-        cell.loadItem(s: song)
+        cell.loadItem(s: song, type: .Playlist)
         
         return cell
     }
@@ -96,13 +102,27 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
+    func refresh(sender:AnyObject) {
+        self.songs = []
+        self.songs = getCoreData()
+        self.refreshControl.endRefreshing()
+    }
+    
+    func userAddedNewSong(song: Song) {
+        self.songs.append(song)
+        self.tableView.hidden = false
+
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToPlayer" {
             let playerController = segue.destinationViewController as PlayerViewController
             let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
-            
             playerController.songs = self.songs
             playerController.index = indexPath.row
+        } else if segue.identifier == "goToSearch" {
+            let searchVC: SearchViewController = segue.destinationViewController as SearchViewController
+            searchVC.delegate = self
         }
     }
     

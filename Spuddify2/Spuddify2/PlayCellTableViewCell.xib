@@ -20,8 +20,8 @@
                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-Fr-g8p">
-                        <rect key="frame" x="8" y="3" width="64" height="64"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-Fr-g8p">
+                        <rect key="frame" x="8" y="4" width="64" height="64"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="5GC-Zu-fxE"/>
                             <constraint firstAttribute="width" constant="64" id="TWJ-6Q-470"/>
@@ -34,19 +34,33 @@
                         <color key="textColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="cCk-OE-iQg">
+                        <rect key="frame" x="291" y="25" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Wup-LJ-opp"/>
+                            <constraint firstAttribute="height" constant="20" id="fpc-ba-2nG"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="cCk-OE-iQg" secondAttribute="trailing" constant="1" id="3Yo-Gp-yPX"/>
                     <constraint firstItem="7cS-Fr-g8p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5" id="7sH-Fv-6ja"/>
                     <constraint firstItem="7cS-Fr-g8p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Xdl-eY-F0b"/>
+                    <constraint firstAttribute="centerY" secondItem="cCk-OE-iQg" secondAttribute="centerY" id="jTu-5a-0dx"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="artist" destination="6LM-mo-U5q" id="EmQ-tC-t3t"/>
                 <outlet property="imgView" destination="7cS-Fr-g8p" id="8PI-gW-rz0"/>
+                <outlet property="rightImage" destination="cCk-OE-iQg" id="bJ5-rb-Hxd"/>
                 <outlet property="song" destination="yMd-ok-KI7" id="DP1-Ib-CLN"/>
             </connections>
+            <point key="canvasLocation" x="445" y="366"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="add" width="40" height="40"/>
+    </resources>
 </document>

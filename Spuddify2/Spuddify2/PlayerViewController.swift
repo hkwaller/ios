@@ -16,6 +16,8 @@ class PlayerViewController: UIViewController {
     var items:[AVPlayerItem] = []
     var paused:Bool = false
     var player:AVQueuePlayer = AVQueuePlayer()
+    var playing: Bool = false
+    var playlist: Playlist?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
@@ -26,7 +28,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var smallImage: UIImageView!
     @IBOutlet weak var backwards: UIButton!
     @IBOutlet weak var forwards: UIButton!
-    @IBOutlet weak var play: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,33 +42,38 @@ class PlayerViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)
 */
         container.layer.cornerRadius = 30;
-        container.layer.borderWidth = 1.0
+        container.layer.borderWidth = 2.0
         container.layer.borderColor = UIColor.blackColor().CGColor
         backwards.layer.cornerRadius = 35;
         forwards.layer.cornerRadius = 35;
-        play.layer.cornerRadius = 35;
+        playButton.layer.cornerRadius = 35;
         
-        /*play.layer.borderWidth = 2.0
-        play.layer.borderColor = UIColor.blackColor().CGColor
+        playButton.layer.borderWidth = 2.0
+        playButton.layer.borderColor = UIColor.blackColor().CGColor
         backwards.layer.borderWidth = 2.0
         backwards.layer.borderColor = UIColor.blackColor().CGColor
         forwards.layer.borderWidth = 2.0
         forwards.layer.borderColor = UIColor.blackColor().CGColor
-        */
+        
+        
         var songs = self.songs
         var index = self.index
-        var playlist = Playlist(index: index, songs: songs)
+        playlist = Playlist(index: index, songs: songs)
 
-        for var i = index; i < playlist.songs.count; i++ {
-            items.append(AVPlayerItem(URL: NSURL(string: playlist.songs[i].previewUrl)))
+        for var i = index; i < self.playlist?.songs.count; i++ {
+            var str = self.playlist?.songs[i].previewUrl
+            items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
         self.player = AVQueuePlayer(items: items)
         self.player.play()
+        self.playing = true
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "what", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        initFirst()
+        //var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+
+        initSong(index)
 
     }
     
@@ -79,15 +86,45 @@ class PlayerViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func initFirst() {
+    func initSong(index: Int) {
         self.albumLabel.text = self.songs[index].album
         self.titleLabel.text = self.songs[index].title
         self.artistLabel.text = self.songs[index].artist
         self.imageView.image = self.songs[index].bigImage
-        
     }
 
+    @IBAction func playPrevious(sender: AnyObject) {
+        if self.index - 1 < 0 { return }
+        self.index--
+        self.items = []
+        
+        for var i = self.index; i < self.playlist?.songs.count; i++ {
+            var str = self.playlist?.songs[i].previewUrl
+            self.items.append(AVPlayerItem(URL: NSURL(string: str!)))
+        }
+        
+        self.player = AVQueuePlayer(items: items)
+        initSong(self.index)
+        self.player.play()
+    }
 
+    @IBAction func play(sender: AnyObject) {
+        if playing {
+            self.player.pause()
+            self.playButton.setTitle("play", forState: UIControlState.Normal)
+        } else {
+            self.player.play()
+            self.playButton.setTitle("||", forState: UIControlState.Normal)
+        }
+        self.playing = !self.playing
+    }
+    
+    @IBAction func playNext(sender: AnyObject) {
+        if self.index + 1 == self.playlist?.songs.count { return }
+        self.player.advanceToNextItem()
+        self.index++
+        initSong(self.index)
+    }
     /*
     // MARK: - Navigation
 
@@ -99,3 +136,5 @@ class PlayerViewController: UIViewController {
     */
 
 }
+
+

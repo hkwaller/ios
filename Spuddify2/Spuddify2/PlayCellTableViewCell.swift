@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
 
+enum TypeOfRightButton {
+    case Playlist
+    case Search
+}
+
 import UIKit
 
 class PlayCellTableViewCell: UITableViewCell {
@@ -13,6 +18,7 @@ class PlayCellTableViewCell: UITableViewCell {
     @IBOutlet weak var song: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var rightImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +28,13 @@ class PlayCellTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func loadItem(#s: Song) {
+    func loadItem(#s: Song, type: TypeOfRightButton) {
+        switch type {
+        case .Playlist:
+            rightImage.image = UIImage(named: "arrow.png")
+        case .Search:
+                rightImage.image = UIImage(named: "add.png")
+        }
         song.text = s.title
         artist.text = s.artist
         imgView.image = s.image

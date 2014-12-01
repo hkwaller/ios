@@ -313,7 +313,7 @@ class SCLAlertView: UIViewController {
             iconImage = SCLAlertViewStyleKit.imageOfWarning
             
         case .Info:
-            viewColor = UIColorFromRGB(0x2866BF)
+            viewColor = UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)
             iconImage = SCLAlertViewStyleKit.imageOfInfo
             
         case .Edit:

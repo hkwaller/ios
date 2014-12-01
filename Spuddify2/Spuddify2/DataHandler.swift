@@ -16,10 +16,12 @@ class DataHandler {
         
     }
     
-    func getCoreData(appDel: AppDelegate) {
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
+    func getCoreData(appDel: AppDelegate) -> [Song] {
+        
         var request = NSFetchRequest(entityName: "Songs")
         request.returnsObjectsAsFaults = false
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+
         var results = context.executeFetchRequest(request, error: nil)
         
         if results?.count > 0 {
@@ -38,9 +40,44 @@ class DataHandler {
                     }
                 }
             }
+            //self.delegate?.coreResults(self.songs)
         } else {
-            println("no results bitch")
+            println("no results")
         }
+        return self.songs
     }
     
+    func getJSON(searchTerm: String) -> [Song] {
+        self.songs = []
+        let baseURL = NSURL(string: "https://api.spotify.com/v1/search?q=\(searchTerm)&type=track")
+        
+        let sharedSession = NSURLSession.sharedSession()
+        
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(baseURL!, completionHandler: { (location:NSURL!, response:NSURLResponse!, error:NSError!) -> Void in
+            
+            if error == nil {
+                let dataObject = NSData(contentsOfURL: location)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    let json = JSON(data: dataObject!)
+                    let arr = json["tracks"]["items"]
+                    
+                    for (key: String, subJson: JSON) in arr {
+                        let artist = subJson["artists"][0]["name"].stringValue
+                        let track = subJson["name"].stringValue
+                        let album = subJson["album"]["name"].stringValue
+                        let img = subJson["album"]["images"][2]["url"].stringValue
+                        let bigImg = subJson["album"]["images"][0]["url"].stringValue
+                        let previewUrl = subJson["preview_url"].stringValue
+                        self.songs.append(Song(artist: artist, title: track, album: album, imgUrl: img, previewUrl: previewUrl, bigUrl: bigImg))
+                    }
+
+                })
+            }
+        })
+        downloadTask.resume()
+        
+        return self.songs
+        
+    }
 }

@@ -11,16 +11,22 @@ import UIKit
 import CoreData
 import QuartzCore
 
+protocol ShareDataDelegate {
+    func userAddedNewSong(song: Song)
+}
+
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var songs: [Song] = []
-
+    var delegate: ShareDataDelegate? = nil
+    var dataHandler: DataHandler = DataHandler()
+    
     @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchInfo: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
@@ -30,18 +36,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func search(sender: AnyObject) {
-
+        var track:String = searchText.text
+        
+        if (countElements(track) == 0) { return }
         
         let loadingView = getLoadingView()
         view.addSubview(loadingView)
         self.searchInfo.hidden = true
-        self.songs = []
         self.tableView.reloadData()
-        var track:String = searchText.text
+        
         self.searchText.endEditing(true)
 
         track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
+
         let baseURL = NSURL(string: "https://api.spotify.com/v1/search?q=\(track)&type=track")
         
         let sharedSession = NSURLSession.sharedSession()
@@ -92,13 +99,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         var song = songs[indexPath.row]
         
-        cell.loadItem(s: song)
+        TypeOfRightButton.Search
+        cell.loadItem(s: song, type: .Search)
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context:NSManagedObjectContext = appDel.managedObjectContext!
         
@@ -111,21 +118,34 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         newSong.setValue(song.album, forKey: "album")
         newSong.setValue(song.previewUrl, forKey: "previewUrl")
         newSong.setValue(song.bigUrl, forKey: "bigUrl")
-
         
         context.save(nil)
         
         let alert = SCLAlertView()
         alert.showInfo("Song added", subTitle: "\(song.title) was added to your playlist")
         
+        if delegate != nil {
+            let newSong: Song = song
+            delegate!.userAddedNewSong(newSong)
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
 
     }
+    
+    
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
         
         UIView.animateWithDuration(0.3, animations: {
             cell.layer.transform = CATransform3DMakeScale(1, 1, 2)
+        })
+    }
+    
+    func didReceiveResults(results: [Song]) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.songs = results
+            self.tableView!.reloadData()
         })
     }
 
@@ -154,6 +174,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return loadingView
     }
 
+    
 
     /*
     // MARK: - Navigation
