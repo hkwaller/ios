@@ -167,6 +167,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         label.center = CGPointMake(screenSize.width / 2, screenSize.height / 2)
         label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.whiteColor()
         label.text = "Loading up some stuff for you, hang tight!"
         
         loadingView.addSubview(label)

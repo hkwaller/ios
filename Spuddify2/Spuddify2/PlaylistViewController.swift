@@ -68,6 +68,31 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         return self.songs
     }
     
+    func deleteSongFromCore(song: Song) {
+        var request = NSFetchRequest(entityName: "Songs")
+        request.returnsObjectsAsFaults = false
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        var results = context.executeFetchRequest(request, error: nil)
+        
+        if results?.count > 0 {
+            for result: AnyObject in results! {
+                if let artist = result.valueForKey("artist") as? String {
+                    if let title = result.valueForKey("song") as? String {
+                        if artist == song.artist && title == song.title {
+                            context.deleteObject(result as NSManagedObject)
+                            println("\(song.artist) - \(song.title) was deleted")
+                        }
+                    }
+                }
+            }
+            
+            context.save(nil)
+        } else {
+            println("no results")
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count;
     }
@@ -88,7 +113,14 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            songs.removeAtIndex(indexPath.row)
+            deleteSongFromCore(self.songs[indexPath.row])
+
+            self.songs.removeAtIndex(indexPath.row)
+            
+            if self.songs.count == 0 {
+                self.tableView.hidden = true
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             var context:NSManagedObjectContext = appDel.managedObjectContext!
         }
@@ -107,7 +139,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         self.songs = getCoreData()
         self.refreshControl.endRefreshing()
     }
-    
+
     func userAddedNewSong(song: Song) {
         self.songs.append(song)
         self.tableView.hidden = false
