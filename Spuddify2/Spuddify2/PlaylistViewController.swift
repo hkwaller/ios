@@ -38,6 +38,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
+        
     }
         
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

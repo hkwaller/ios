@@ -34,13 +34,7 @@ class PlayerViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
-        /*
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)]
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 255.0/255.0, green: 40/255.0, blue: 81/255.0, alpha: 1.0)
-*/
+
         container.layer.cornerRadius = 30;
         container.layer.borderWidth = 2.0
         container.layer.borderColor = UIColor.blackColor().CGColor
@@ -69,7 +63,7 @@ class PlayerViewController: UIViewController {
         self.player.play()
         self.playing = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "what", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
         //var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 
@@ -82,6 +76,11 @@ class PlayerViewController: UIViewController {
         self.counter += 0.003
     }
     
+    func goToNext() {
+        initSong(self.index)
+        playNext(self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -90,7 +89,7 @@ class PlayerViewController: UIViewController {
         self.albumLabel.text = self.songs[index].album
         self.titleLabel.text = self.songs[index].title
         self.artistLabel.text = self.songs[index].artist
-        
+        setDefaults()
         var url = NSURL(string: self.songs[index].bigUrl)
         var imgData = NSData(contentsOfURL: url!)
         self.imageView.image = UIImage(data: imgData!)
@@ -128,6 +127,16 @@ class PlayerViewController: UIViewController {
         self.index++
         initSong(self.index)
     }
+    
+    func setDefaults() {
+        var sharedDefaults: NSUserDefaults = NSUserDefaults(suiteName: "group.Westerdals.SpuddifySharingDefaults")!;
+        sharedDefaults.setValue(self.songs[index].artist, forKey: "artist")
+        sharedDefaults.setValue(self.songs[index].album, forKey: "album")
+        sharedDefaults.setValue(self.songs[index].title, forKey: "title")
+
+        sharedDefaults.synchronize()
+    }
+    
     /*
     // MARK: - Navigation
 
