@@ -11,7 +11,10 @@ import CoreData
 
 class DataHandler {
     var songs: [Song] = []
-    
+    var resultsFromCoreData = [AnyObject]()
+    var context:NSManagedObjectContext?
+    typealias JSONCompletionBlock = (data: [Song]?, error: NSError?) -> ()
+
     init() {
         
     }
@@ -20,9 +23,12 @@ class DataHandler {
         
         var request = NSFetchRequest(entityName: "Songs")
         request.returnsObjectsAsFaults = false
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        self.context = appDel.managedObjectContext!
 
-        var results = context.executeFetchRequest(request, error: nil)
+        var results = self.context?.executeFetchRequest(request, error: nil)
+        
+        self.resultsFromCoreData = results!
         
         if results?.count > 0 {
             for result: AnyObject in results! {
@@ -40,14 +46,13 @@ class DataHandler {
                     }
                 }
             }
-            //self.delegate?.coreResults(self.songs)
         } else {
             println("no results")
         }
         return self.songs
     }
     
-    func getJSON(searchTerm: String) -> [Song] {
+    func fetchJSON(searchTerm: String, completion: JSONCompletionBlock) {
         self.songs = []
         let baseURL = NSURL(string: "https://api.spotify.com/v1/search?q=\(searchTerm)&type=track")
         
@@ -71,13 +76,28 @@ class DataHandler {
                         let previewUrl = subJson["preview_url"].stringValue
                         self.songs.append(Song(artist: artist, title: track, album: album, imgUrl: img, previewUrl: previewUrl, bigUrl: bigImg))
                     }
-
+                    var error: NSError?
+                    completion(data: self.songs, error: error)
                 })
+            } else {
+                completion(data: nil, error: error)
             }
         })
         downloadTask.resume()
-        
-        return self.songs
-        
     }
+    
+    func deleteSongFromCore(song: Song) {
+        for result in self.resultsFromCoreData {
+            if let artist = result.valueForKey("artist") as? String {
+                if let title = result.valueForKey("song") as? String {
+                    if artist == song.artist && title == song.title {
+                        self.context?.deleteObject(result as NSManagedObject)
+                        println("\(song.artist) - \(song.title) was deleted")
+                    }
+                }
+            }
+        }
+        self.context?.save(nil)
+    }
+
 }

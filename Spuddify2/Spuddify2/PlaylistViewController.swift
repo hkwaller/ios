@@ -13,6 +13,7 @@ import AVFoundation
 class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShareDataDelegate {
     var songs: [Song] = []
     var playlist: [AVPlayerItem] = []
+    var dataHandler: DataHandler = DataHandler()
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var refreshControl:UIRefreshControl!
     
@@ -22,8 +23,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        
-        self.songs = getCoreData()
+
+        self.songs = dataHandler.getCoreData(appDel)
         
         if songs.count == 0 { self.tableView.hidden = true }
 
@@ -38,61 +39,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
     }
-    
-    func getCoreData() -> [Song] {
-        var request = NSFetchRequest(entityName: "Songs")
-        request.returnsObjectsAsFaults = false
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-
-        var results = context.executeFetchRequest(request, error: nil)
         
-        if results?.count > 0 {
-            for result: AnyObject in results! {
-                if let artist = result.valueForKey("artist") as? String {
-                    if let title = result.valueForKey("song") as? String {
-                        if let imgUrl = result.valueForKey("imgUrl") as? String {
-                            if let album = result.valueForKey("album") as? String {
-                                if let bigUrl = result.valueForKey("bigUrl") as? String {
-                                    if let previewUrl = result.valueForKey("previewUrl") as? String {
-                                        self.songs.append(Song(artist: artist, title: title, album: album, imgUrl: imgUrl, previewUrl: previewUrl, bigUrl: bigUrl))
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            println("no results")
-        }
-        return self.songs
-    }
-    
-    func deleteSongFromCore(song: Song) {
-        var request = NSFetchRequest(entityName: "Songs")
-        request.returnsObjectsAsFaults = false
-        var context:NSManagedObjectContext = appDel.managedObjectContext!
-        
-        var results = context.executeFetchRequest(request, error: nil)
-        
-        if results?.count > 0 {
-            for result: AnyObject in results! {
-                if let artist = result.valueForKey("artist") as? String {
-                    if let title = result.valueForKey("song") as? String {
-                        if artist == song.artist && title == song.title {
-                            context.deleteObject(result as NSManagedObject)
-                            println("\(song.artist) - \(song.title) was deleted")
-                        }
-                    }
-                }
-            }
-            
-            context.save(nil)
-        } else {
-            println("no results")
-        }
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count;
     }
@@ -113,7 +60,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            deleteSongFromCore(self.songs[indexPath.row])
+            dataHandler.deleteSongFromCore(self.songs[indexPath.row])
 
             self.songs.removeAtIndex(indexPath.row)
             
@@ -136,7 +83,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     func refresh(sender:AnyObject) {
         self.songs = []
-        self.songs = getCoreData()
+        self.songs = self.dataHandler.getCoreData(self.appDel)
         self.refreshControl.endRefreshing()
     }
 

@@ -26,7 +26,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
@@ -37,7 +36,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func search(sender: AnyObject) {
         var track:String = searchText.text
-        
+        self.songs = []
         if (countElements(track) == 0) { return }
         
         let loadingView = getLoadingView()
@@ -49,44 +48,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
 
-        let baseURL = NSURL(string: "https://api.spotify.com/v1/search?q=\(track)&type=track")
-        
-        let sharedSession = NSURLSession.sharedSession()
-        
-        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(baseURL!, completionHandler: { (location:NSURL!, response:NSURLResponse!, error:NSError!) -> Void in
-            
-            if error == nil {
-                let dataObject = NSData(contentsOfURL: location)
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    let json = JSON(data: dataObject!)
-                    let arr = json["tracks"]["items"]
-                    
-                    for (key: String, subJson: JSON) in arr {
-                        let artist = subJson["artists"][0]["name"].stringValue
-                        let track = subJson["name"].stringValue
-                        let album = subJson["album"]["name"].stringValue
-                        let img = subJson["album"]["images"][2]["url"].stringValue
-                        let bigImg = subJson["album"]["images"][0]["url"].stringValue
-                        let previewUrl = subJson["preview_url"].stringValue
-                        self.songs.append(Song(artist: artist, title: track, album: album, imgUrl: img, previewUrl: previewUrl, bigUrl: bigImg))
-                    }
-                    
-                    self.tableView.hidden = false;
-                    self.tableView.reloadData()
-                    loadingView.removeFromSuperview()
-                })
+        dataHandler.fetchJSON(track, completion: { (data, error) -> () in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.songs = data!
+                self.tableView.hidden = false;
+                self.tableView.reloadData()
+                loadingView.removeFromSuperview()
             }
         })
-        
-        
-        downloadTask.resume()
     }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,8 +106,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
-    
-    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
         
@@ -141,14 +113,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.layer.transform = CATransform3DMakeScale(1, 1, 2)
         })
     }
-    
-    func didReceiveResults(results: [Song]) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.songs = results
-            self.tableView!.reloadData()
-        })
-    }
-
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         textField.resignFirstResponder()
@@ -174,9 +138,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return loadingView
     }
-
     
-
     /*
     // MARK: - Navigation
 
