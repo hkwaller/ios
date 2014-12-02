@@ -28,6 +28,10 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointToSearch" translatesAutoresizingMaskIntoConstraints="NO" id="i3I-dC-WlB">
                                 <rect key="frame" x="354" y="454" width="150" height="126"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="fqa-I0-sdo"/>
+                                    <constraint firstAttribute="width" constant="150" id="p35-cD-F1I"/>
+                                </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Wwj-Xp-ngX">
                                 <rect key="frame" x="0.0" y="64" width="600" height="600"/>
@@ -389,7 +393,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pointToSearch" width="150" height="126"/>
+        <image name="pointToSearch" width="610" height="512"/>
         <image name="search" width="20" height="20"/>
     </resources>
 </document>

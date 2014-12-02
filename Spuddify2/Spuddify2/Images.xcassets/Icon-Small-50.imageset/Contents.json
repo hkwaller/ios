@@ -3,7 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "pointToSearch.png"
+      "filename" : "Icon-Small-50.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "Icon-Small-50@2x.png"
     }
   ],
   "info" : {
