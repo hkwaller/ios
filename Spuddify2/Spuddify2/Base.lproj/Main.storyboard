@@ -123,6 +123,30 @@
                                 <color key="textColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="134-Vd-nR1">
+                                <rect key="frame" x="505" y="64" width="95" height="50"/>
+                                <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="arE-oY-2dx"/>
+                                    <constraint firstAttribute="width" constant="95" id="jT3-im-jC9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="21"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="search">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="search:" destination="KBr-jk-MFN" eventType="touchUpInside" id="EbM-0A-2nY"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for something, will you?" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8qQ-NC-0eZ">
+                                <rect key="frame" x="20" y="64" width="480" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RNi-VX-V61">
                                 <rect key="frame" x="0.0" y="114" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,90 +163,24 @@
                                     <outlet property="delegate" destination="KBr-jk-MFN" id="Ea9-9j-Hyl"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="134-Vd-nR1">
-                                <rect key="frame" x="505" y="64" width="95" height="50"/>
-                                <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="QYA-fL-2Ma"/>
-                                    <constraint firstAttribute="height" constant="50" id="arE-oY-2dx"/>
-                                    <constraint firstAttribute="width" constant="95" id="jT3-im-jC9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="21"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="search">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="QYA-fL-2Ma"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="search:" destination="KBr-jk-MFN" eventType="touchUpInside" id="EbM-0A-2nY"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for something, will you?" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8qQ-NC-0eZ">
-                                <rect key="frame" x="20" y="64" width="480" height="50"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="1r5-xb-yLU"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="Dej-J4-TSo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="1r5-xb-yLU"/>
-                                        <exclude reference="Dej-J4-TSo"/>
-                                    </mask>
-                                </variation>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="baH-Pc-y8H" firstAttribute="top" secondItem="sPY-qh-ol1" secondAttribute="bottom" constant="289" id="0Ji-mO-838"/>
-                            <constraint firstItem="134-Vd-nR1" firstAttribute="top" secondItem="KcS-c6-U30" secondAttribute="topMargin" constant="59" id="3nE-rw-Xla"/>
                             <constraint firstAttribute="bottomMargin" secondItem="RNi-VX-V61" secondAttribute="bottom" constant="-50" id="4u8-6a-HN9"/>
                             <constraint firstItem="8qQ-NC-0eZ" firstAttribute="bottom" secondItem="134-Vd-nR1" secondAttribute="bottom" id="8k8-t8-vi6"/>
-                            <constraint firstItem="8qQ-NC-0eZ" firstAttribute="top" secondItem="f6T-ae-ff6" secondAttribute="bottom" id="9QF-3q-QD5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8qQ-NC-0eZ" secondAttribute="trailing" constant="84" id="9ed-zD-2Cv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RNi-VX-V61" secondAttribute="trailing" constant="-16" id="Bsi-SV-D6F"/>
                             <constraint firstItem="8qQ-NC-0eZ" firstAttribute="leading" secondItem="RNi-VX-V61" secondAttribute="leading" constant="20" id="Cje-yX-gMQ"/>
-                            <constraint firstItem="f6T-ae-ff6" firstAttribute="top" secondItem="134-Vd-nR1" secondAttribute="bottom" constant="-67" id="GhB-tQ-2Pk"/>
                             <constraint firstItem="134-Vd-nR1" firstAttribute="trailing" secondItem="RNi-VX-V61" secondAttribute="trailing" id="IRg-QT-4UN"/>
                             <constraint firstItem="RNi-VX-V61" firstAttribute="top" secondItem="8qQ-NC-0eZ" secondAttribute="bottom" id="Vqa-OH-lhn"/>
                             <constraint firstAttribute="centerX" secondItem="sPY-qh-ol1" secondAttribute="centerX" id="XIP-4H-vSQ"/>
                             <constraint firstItem="RNi-VX-V61" firstAttribute="leading" secondItem="KcS-c6-U30" secondAttribute="leadingMargin" constant="-16" id="XdZ-RK-COV"/>
-                            <constraint firstItem="8qQ-NC-0eZ" firstAttribute="leading" secondItem="KcS-c6-U30" secondAttribute="leadingMargin" id="fcY-cm-a6P"/>
                             <constraint firstItem="8qQ-NC-0eZ" firstAttribute="top" secondItem="f6T-ae-ff6" secondAttribute="bottom" id="l2M-mt-bsM"/>
                             <constraint firstItem="134-Vd-nR1" firstAttribute="top" secondItem="KcS-c6-U30" secondAttribute="topMargin" constant="64" id="lsa-WT-VVd"/>
                             <constraint firstItem="RNi-VX-V61" firstAttribute="top" secondItem="f6T-ae-ff6" secondAttribute="bottom" constant="50" id="mtz-lN-3zM"/>
-                            <constraint firstItem="134-Vd-nR1" firstAttribute="trailing" secondItem="RNi-VX-V61" secondAttribute="trailing" id="pP7-mE-Dej"/>
                             <constraint firstItem="sPY-qh-ol1" firstAttribute="centerY" secondItem="KcS-c6-U30" secondAttribute="centerY" id="r2e-75-Wnt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8qQ-NC-0eZ" secondAttribute="trailing" constant="87" id="s0f-Gm-jRA"/>
-                            <constraint firstItem="sPY-qh-ol1" firstAttribute="leading" secondItem="KcS-c6-U30" secondAttribute="leadingMargin" id="svc-m0-QB6"/>
-                            <constraint firstItem="134-Vd-nR1" firstAttribute="bottom" secondItem="8qQ-NC-0eZ" secondAttribute="bottom" constant="-5" id="udm-Zi-kJa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sPY-qh-ol1" secondAttribute="trailing" id="vb1-Dl-b45"/>
-                            <constraint firstItem="134-Vd-nR1" firstAttribute="leading" secondItem="8qQ-NC-0eZ" secondAttribute="trailing" constant="8" symbolic="YES" id="xcA-6i-4yj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="134-Vd-nR1" secondAttribute="trailing" constant="-16" id="yPJ-XP-MId"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="GhB-tQ-2Pk"/>
-                                <exclude reference="9QF-3q-QD5"/>
-                                <exclude reference="fcY-cm-a6P"/>
-                                <exclude reference="s0f-Gm-jRA"/>
-                                <exclude reference="svc-m0-QB6"/>
-                                <exclude reference="vb1-Dl-b45"/>
-                                <exclude reference="3nE-rw-Xla"/>
-                                <exclude reference="pP7-mE-Dej"/>
-                                <exclude reference="udm-Zi-kJa"/>
-                                <exclude reference="xcA-6i-4yj"/>
-                                <exclude reference="yPJ-XP-MId"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="searchInfo" destination="sPY-qh-ol1" id="Xcl-c3-t7H"/>

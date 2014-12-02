@@ -15,7 +15,7 @@ protocol ShareDataDelegate {
     func userAddedNewSong(song: Song)
 }
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var songs: [Song] = []
     var delegate: ShareDataDelegate? = nil
     var dataHandler: DataHandler = DataHandler()
@@ -29,6 +29,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
+        self.searchText.delegate = self;
+
         if songs.count == 0 {
             tableView.hidden = true
         }
@@ -115,6 +117,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        search(self)
         textField.resignFirstResponder()
         textField.endEditing(true)
         return true;
