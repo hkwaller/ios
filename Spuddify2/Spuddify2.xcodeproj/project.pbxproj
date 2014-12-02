@@ -16,10 +16,10 @@
 		31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B801A2A032800038C44 /* PlayerViewController.swift */; };
 		319F1B8E1A2A732500F678B6 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */; };
 		319F1B901A2A81ED00F678B6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F1B8F1A2A81ED00F678B6 /* Playlist.swift */; };
-		31AC1D411A2DE73700DC2CB0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */; };
-		31AC1D461A2DE73700DC2CB0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1D451A2DE73700DC2CB0 /* TodayViewController.swift */; };
-		31AC1D481A2DE73700DC2CB0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1D471A2DE73700DC2CB0 /* MainInterface.storyboard */; };
-		31AC1D4B1A2DE73700DC2CB0 /* SpuddifyWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31AC1D3E1A2DE73700DC2CB0 /* SpuddifyWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		31AC1D6B1A2DF25900DC2CB0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */; };
+		31AC1D701A2DF25900DC2CB0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */; };
+		31AC1D721A2DF25900DC2CB0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */; };
+		31AC1D751A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		31CA11A41A2381F80094F96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A31A2381F80094F96E /* AppDelegate.swift */; };
 		31CA11A71A2381F80094F96E /* Spuddify2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A51A2381F80094F96E /* Spuddify2.xcdatamodeld */; };
 		31CA11A91A2381F80094F96E /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A81A2381F80094F96E /* PlaylistViewController.swift */; };
@@ -30,12 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		31AC1D491A2DE73700DC2CB0 /* PBXContainerItemProxy */ = {
+		31AC1D731A2DF25900DC2CB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 31CA11961A2381F80094F96E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 31AC1D3D1A2DE73700DC2CB0;
-			remoteInfo = SpuddifyWidget;
+			remoteGlobalIDString = 31AC1D691A2DF25900DC2CB0;
+			remoteInfo = SpuddifyTodayWidget;
 		};
 		31CA11B71A2381F80094F96E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,7 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				31AC1D4B1A2DE73700DC2CB0 /* SpuddifyWidget.appex in Embed App Extensions */,
+				31AC1D751A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,13 +70,13 @@
 		31621B801A2A032800038C44 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		319F1B8F1A2A81ED00F678B6 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
-		31AC1D3E1A2DE73700DC2CB0 /* SpuddifyWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpuddifyWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		31AC1D441A2DE73700DC2CB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31AC1D451A2DE73700DC2CB0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		31AC1D471A2DE73700DC2CB0 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		31AC1D501A2DE8EA00DC2CB0 /* Spuddify2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Spuddify2.entitlements; sourceTree = "<group>"; };
-		31AC1D511A2DE8FA00DC2CB0 /* SpuddifyWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpuddifyWidget.entitlements; sourceTree = "<group>"; };
+		31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpuddifyTodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		31AC1D6E1A2DF25900DC2CB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		31AC1D791A2DF25D00DC2CB0 /* SpuddifyTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpuddifyTodayWidget.entitlements; sourceTree = "<group>"; };
 		31CA119E1A2381F80094F96E /* Spuddify2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spuddify2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31CA11A21A2381F80094F96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31CA11A31A2381F80094F96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,11 +91,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		31AC1D3B1A2DE73700DC2CB0 /* Frameworks */ = {
+		31AC1D671A2DF25900DC2CB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31AC1D411A2DE73700DC2CB0 /* NotificationCenter.framework in Frameworks */,
+				31AC1D6B1A2DF25900DC2CB0 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,21 +124,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		31AC1D421A2DE73700DC2CB0 /* SpuddifyWidget */ = {
+		31AC1D6C1A2DF25900DC2CB0 /* SpuddifyTodayWidget */ = {
 			isa = PBXGroup;
 			children = (
-				31AC1D511A2DE8FA00DC2CB0 /* SpuddifyWidget.entitlements */,
-				31AC1D451A2DE73700DC2CB0 /* TodayViewController.swift */,
-				31AC1D471A2DE73700DC2CB0 /* MainInterface.storyboard */,
-				31AC1D431A2DE73700DC2CB0 /* Supporting Files */,
+				31AC1D791A2DF25D00DC2CB0 /* SpuddifyTodayWidget.entitlements */,
+				31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */,
+				31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */,
+				31AC1D6D1A2DF25900DC2CB0 /* Supporting Files */,
 			);
-			path = SpuddifyWidget;
+			path = SpuddifyTodayWidget;
 			sourceTree = "<group>";
 		};
-		31AC1D431A2DE73700DC2CB0 /* Supporting Files */ = {
+		31AC1D6D1A2DF25900DC2CB0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				31AC1D441A2DE73700DC2CB0 /* Info.plist */,
+				31AC1D6E1A2DF25900DC2CB0 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 			children = (
 				31CA11A01A2381F80094F96E /* Spuddify2 */,
 				31CA11B91A2381F80094F96E /* Spuddify2Tests */,
-				31AC1D421A2DE73700DC2CB0 /* SpuddifyWidget */,
+				31AC1D6C1A2DF25900DC2CB0 /* SpuddifyTodayWidget */,
 				31AC1D3F1A2DE73700DC2CB0 /* Frameworks */,
 				31CA119F1A2381F80094F96E /* Products */,
 			);
@@ -159,7 +159,7 @@
 			children = (
 				31CA119E1A2381F80094F96E /* Spuddify2.app */,
 				31CA11B61A2381F80094F96E /* Spuddify2Tests.xctest */,
-				31AC1D3E1A2DE73700DC2CB0 /* SpuddifyWidget.appex */,
+				31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,21 +216,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		31AC1D3D1A2DE73700DC2CB0 /* SpuddifyWidget */ = {
+		31AC1D691A2DF25900DC2CB0 /* SpuddifyTodayWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 31AC1D4E1A2DE73700DC2CB0 /* Build configuration list for PBXNativeTarget "SpuddifyWidget" */;
+			buildConfigurationList = 31AC1D761A2DF25900DC2CB0 /* Build configuration list for PBXNativeTarget "SpuddifyTodayWidget" */;
 			buildPhases = (
-				31AC1D3A1A2DE73700DC2CB0 /* Sources */,
-				31AC1D3B1A2DE73700DC2CB0 /* Frameworks */,
-				31AC1D3C1A2DE73700DC2CB0 /* Resources */,
+				31AC1D661A2DF25900DC2CB0 /* Sources */,
+				31AC1D671A2DF25900DC2CB0 /* Frameworks */,
+				31AC1D681A2DF25900DC2CB0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SpuddifyWidget;
-			productName = SpuddifyWidget;
-			productReference = 31AC1D3E1A2DE73700DC2CB0 /* SpuddifyWidget.appex */;
+			name = SpuddifyTodayWidget;
+			productName = SpuddifyTodayWidget;
+			productReference = 31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		31CA119D1A2381F80094F96E /* Spuddify2 */ = {
@@ -245,7 +245,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				31AC1D4A1A2DE73700DC2CB0 /* PBXTargetDependency */,
+				31AC1D741A2DF25900DC2CB0 /* PBXTargetDependency */,
 			);
 			name = Spuddify2;
 			productName = Spuddify2;
@@ -279,7 +279,7 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Hannes Waller";
 				TargetAttributes = {
-					31AC1D3D1A2DE73700DC2CB0 = {
+					31AC1D691A2DF25900DC2CB0 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = WEZMQH4X5P;
 						SystemCapabilities = {
@@ -318,17 +318,17 @@
 			targets = (
 				31CA119D1A2381F80094F96E /* Spuddify2 */,
 				31CA11B51A2381F80094F96E /* Spuddify2Tests */,
-				31AC1D3D1A2DE73700DC2CB0 /* SpuddifyWidget */,
+				31AC1D691A2DF25900DC2CB0 /* SpuddifyTodayWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		31AC1D3C1A2DE73700DC2CB0 /* Resources */ = {
+		31AC1D681A2DF25900DC2CB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31AC1D481A2DE73700DC2CB0 /* MainInterface.storyboard in Resources */,
+				31AC1D721A2DF25900DC2CB0 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,11 +353,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		31AC1D3A1A2DE73700DC2CB0 /* Sources */ = {
+		31AC1D661A2DF25900DC2CB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31AC1D461A2DE73700DC2CB0 /* TodayViewController.swift in Sources */,
+				31AC1D701A2DF25900DC2CB0 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +390,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		31AC1D4A1A2DE73700DC2CB0 /* PBXTargetDependency */ = {
+		31AC1D741A2DF25900DC2CB0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 31AC1D3D1A2DE73700DC2CB0 /* SpuddifyWidget */;
-			targetProxy = 31AC1D491A2DE73700DC2CB0 /* PBXContainerItemProxy */;
+			target = 31AC1D691A2DF25900DC2CB0 /* SpuddifyTodayWidget */;
+			targetProxy = 31AC1D731A2DF25900DC2CB0 /* PBXContainerItemProxy */;
 		};
 		31CA11B81A2381F80094F96E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -422,17 +422,17 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		31AC1D4C1A2DE73700DC2CB0 /* Debug */ = {
+		31AC1D771A2DF25900DC2CB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SpuddifyWidget/SpuddifyWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SpuddifyTodayWidget/SpuddifyTodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SpuddifyWidget/Info.plist;
+				INFOPLIST_FILE = SpuddifyTodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -440,13 +440,13 @@
 			};
 			name = Debug;
 		};
-		31AC1D4D1A2DE73700DC2CB0 /* Release */ = {
+		31AC1D781A2DF25900DC2CB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SpuddifyWidget/SpuddifyWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SpuddifyTodayWidget/SpuddifyTodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = SpuddifyWidget/Info.plist;
+				INFOPLIST_FILE = SpuddifyTodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -598,11 +598,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		31AC1D4E1A2DE73700DC2CB0 /* Build configuration list for PBXNativeTarget "SpuddifyWidget" */ = {
+		31AC1D761A2DF25900DC2CB0 /* Build configuration list for PBXNativeTarget "SpuddifyTodayWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31AC1D4C1A2DE73700DC2CB0 /* Debug */,
-				31AC1D4D1A2DE73700DC2CB0 /* Release */,
+				31AC1D771A2DF25900DC2CB0 /* Debug */,
+				31AC1D781A2DF25900DC2CB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

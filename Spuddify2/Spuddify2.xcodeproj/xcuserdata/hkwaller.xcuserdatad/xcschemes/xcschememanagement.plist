@@ -9,7 +9,7 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>SpuddifyWidget2.xcscheme</key>
+		<key>SpuddifyTodayWidget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -18,6 +18,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>31AC1D3D1A2DE73700DC2CB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>31AC1D551A2DF21300DC2CB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>31AC1D691A2DF25900DC2CB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
