@@ -16,8 +16,6 @@ struct Song {
     var imgUrl: String
     var previewUrl: String
     var bigUrl: String
-    var image: UIImage
-    var bigImage: UIImage
     
     init(artist: String, title: String, album: String, imgUrl: String, previewUrl: String, bigUrl: String) {
         self.artist = artist
@@ -26,13 +24,5 @@ struct Song {
         self.previewUrl = previewUrl
         self.imgUrl = imgUrl
         self.bigUrl = bigUrl
-        
-        var url:NSURL = NSURL(string: imgUrl)!
-        var imageData:NSData = NSData(contentsOfURL: url, options: nil, error: nil)!
-        self.image = UIImage(data: imageData)!
-        
-        var bigData = NSData(contentsOfURL: NSURL(string: bigUrl)!, options: nil, error: nil)!
-        
-        self.bigImage = UIImage(data: bigData)!
     }
 }

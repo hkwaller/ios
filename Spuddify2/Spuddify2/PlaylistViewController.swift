@@ -12,7 +12,7 @@ import AVFoundation
 
 class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShareDataDelegate {
     var songs: [Song] = []
-    var playlist: [AVPlayerItem] = []
+    var imageCache = [String : UIImage]()
     var dataHandler: DataHandler = DataHandler()
     let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var refreshControl:UIRefreshControl!
@@ -50,6 +50,37 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         let song = songs[indexPath.row]
         
         cell.loadItem(s: song, type: .Playlist)
+        
+        let urlString = song.imgUrl as String
+        var image = self.imageCache[urlString]
+        
+        if (image == nil) {
+            var imgURL: NSURL = NSURL(string: urlString)!
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    image = UIImage(data: data)
+                    self.imageCache[urlString] = image
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? PlayCellTableViewCell {
+                            cellToUpdate.imgView.image = image
+                        }
+                    })
+                }
+                else {
+                    println(error.localizedDescription)
+                }
+            })
+            
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), {
+                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? PlayCellTableViewCell {
+                    cellToUpdate.imgView.image = image
+                }
+            })
+        }
+        
         
         return cell
     }

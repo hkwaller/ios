@@ -37,6 +37,5 @@ class PlayCellTableViewCell: UITableViewCell {
         }
         song.text = s.title
         artist.text = s.artist
-        imgView.image = s.image
     }
 }

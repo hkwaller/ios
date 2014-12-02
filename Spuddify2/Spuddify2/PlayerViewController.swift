@@ -90,7 +90,10 @@ class PlayerViewController: UIViewController {
         self.albumLabel.text = self.songs[index].album
         self.titleLabel.text = self.songs[index].title
         self.artistLabel.text = self.songs[index].artist
-        self.imageView.image = self.songs[index].bigImage
+        
+        var url = NSURL(string: self.songs[index].bigUrl)
+        var imgData = NSData(contentsOfURL: url!)
+        self.imageView.image = UIImage(data: imgData!)
     }
 
     @IBAction func playPrevious(sender: AnyObject) {
