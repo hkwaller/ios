@@ -185,6 +185,11 @@
                             <constraint firstItem="RNi-VX-V61" firstAttribute="top" secondItem="f6T-ae-ff6" secondAttribute="bottom" constant="50" id="mtz-lN-3zM"/>
                             <constraint firstItem="sPY-qh-ol1" firstAttribute="centerY" secondItem="KcS-c6-U30" secondAttribute="centerY" id="r2e-75-Wnt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0Ji-mO-838"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="searchInfo" destination="sPY-qh-ol1" id="Xcl-c3-t7H"/>

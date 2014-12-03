@@ -20,6 +20,7 @@
 		31AC1D701A2DF25900DC2CB0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */; };
 		31AC1D721A2DF25900DC2CB0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */; };
 		31AC1D751A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		31C482211A2E262C00D4E4C2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C482201A2E262C00D4E4C2 /* Reachability.swift */; };
 		31CA11A41A2381F80094F96E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A31A2381F80094F96E /* AppDelegate.swift */; };
 		31CA11A71A2381F80094F96E /* Spuddify2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A51A2381F80094F96E /* Spuddify2.xcdatamodeld */; };
 		31CA11A91A2381F80094F96E /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA11A81A2381F80094F96E /* PlaylistViewController.swift */; };
@@ -77,6 +78,7 @@
 		31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		31AC1D791A2DF25D00DC2CB0 /* SpuddifyTodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpuddifyTodayWidget.entitlements; sourceTree = "<group>"; };
+		31C482201A2E262C00D4E4C2 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		31CA119E1A2381F80094F96E /* Spuddify2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spuddify2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31CA11A21A2381F80094F96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31CA11A31A2381F80094F96E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		31C482221A2E265F00D4E4C2 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */,
+				31C482201A2E262C00D4E4C2 /* Reachability.swift */,
+				31621B791A29E16300038C44 /* SwiftyJSON.swift */,
+			);
+			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
 		31CA11951A2381F80094F96E = {
 			isa = PBXGroup;
 			children = (
@@ -175,11 +187,10 @@
 				31621B801A2A032800038C44 /* PlayerViewController.swift */,
 				31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */,
 				31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */,
-				319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */,
 				319F1B8F1A2A81ED00F678B6 /* Playlist.swift */,
 				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
+				31C482221A2E265F00D4E4C2 /* Helper Classes */,
 				31621B781A29E16300038C44 /* Song.swift */,
-				31621B791A29E16300038C44 /* SwiftyJSON.swift */,
 				31CA11AD1A2381F80094F96E /* Images.xcassets */,
 				31CA11AF1A2381F80094F96E /* LaunchScreen.xib */,
 				31CA11A51A2381F80094F96E /* Spuddify2.xcdatamodeld */,
@@ -367,6 +378,7 @@
 			files = (
 				31CA11A91A2381F80094F96E /* PlaylistViewController.swift in Sources */,
 				31588C631A2C62D700EB1A02 /* DataHandler.swift in Sources */,
+				31C482211A2E262C00D4E4C2 /* Reachability.swift in Sources */,
 				31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */,
 				31621B7F1A29E86B00038C44 /* SearchViewController.swift in Sources */,
 				31CA11A71A2381F80094F96E /* Spuddify2.xcdatamodeld in Sources */,
@@ -605,6 +617,7 @@
 				31AC1D781A2DF25900DC2CB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		31CA11991A2381F80094F96E /* Build configuration list for PBXProject "Spuddify2" */ = {
 			isa = XCConfigurationList;
