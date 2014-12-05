@@ -71,9 +71,7 @@ class PlayerViewController: UIViewController {
         
         player = AVQueuePlayer(items: items)
         player.play()
-        
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
-        AVAudioSession.sharedInstance().setActive(true, error: nil)
+
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
@@ -126,7 +124,7 @@ class PlayerViewController: UIViewController {
         player.play()
     }
 
-    @IBAction func play(sender: AnyObject) {
+    @IBAction func play(sender: AnyObject) {        
         if player.playing {
             player.pause()
             self.playButton.setTitle("play", forState: UIControlState.Normal)
