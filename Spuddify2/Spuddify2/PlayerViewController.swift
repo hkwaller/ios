@@ -9,15 +9,25 @@
 import UIKit
 import AVFoundation
 
+
+extension AVQueuePlayer {
+    var playing: Bool {
+        if self.rate > 0.1 {
+            return true
+        }
+        return false
+    }
+}
+
+var player: AVQueuePlayer = AVQueuePlayer()
+
 class PlayerViewController: UIViewController {
     var index: Int = 0
     var counter: Float = 0.0
     var songs:[Song] = []
     var items:[AVPlayerItem] = []
-    var paused:Bool = false
-    var player:AVQueuePlayer = AVQueuePlayer()
-    var playing: Bool = false
     var playlist: Playlist?
+    var timer: NSTimer = NSTimer()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
@@ -59,16 +69,22 @@ class PlayerViewController: UIViewController {
             items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
-        self.player = AVQueuePlayer(items: items)
-        self.player.play()
-        self.playing = true
+        player = AVQueuePlayer(items: items)
+        player.play()
+        
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+        AVAudioSession.sharedInstance().setActive(true, error: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 
         initSong(index)
 
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.timer.invalidate()
     }
     
     func update() {
@@ -105,25 +121,24 @@ class PlayerViewController: UIViewController {
             self.items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
-        self.player = AVQueuePlayer(items: items)
+        player = AVQueuePlayer(items: items)
         initSong(self.index)
-        self.player.play()
+        player.play()
     }
 
     @IBAction func play(sender: AnyObject) {
-        if playing {
-            self.player.pause()
+        if player.playing {
+            player.pause()
             self.playButton.setTitle("play", forState: UIControlState.Normal)
         } else {
-            self.player.play()
+            player.play()
             self.playButton.setTitle("||", forState: UIControlState.Normal)
         }
-        self.playing = !self.playing
     }
     
     @IBAction func playNext(sender: AnyObject) {
         if self.index + 1 == self.playlist?.songs.count { return }
-        self.player.advanceToNextItem()
+        player.advanceToNextItem()
         self.index++
         initSong(self.index)
     }
