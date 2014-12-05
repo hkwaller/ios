@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-
+import MediaPlayer
 
 extension AVQueuePlayer {
     var playing: Bool {
@@ -36,20 +36,16 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var container: UIView!
-    @IBOutlet weak var smallImage: UIImageView!
     @IBOutlet weak var backwards: UIButton!
     @IBOutlet weak var forwards: UIButton!
     @IBOutlet weak var playButton: UIButton!
-    
+    @IBOutlet weak var centerImage: UIImageView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var volumeView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
-
-        container.layer.cornerRadius = 30;
-        container.layer.borderWidth = 2.0
-        container.layer.borderColor = UIColor.blackColor().CGColor
         backwards.layer.cornerRadius = 35;
         forwards.layer.cornerRadius = 35;
         playButton.layer.cornerRadius = 35;
@@ -71,9 +67,16 @@ class PlayerViewController: UIViewController {
             items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
+        var mpVol: MPVolumeView = MPVolumeView(frame: volumeView.bounds)
+        volumeView.addSubview(mpVol)
+        
+        
+        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        visualEffectView.frame = imageView.bounds
+        imageView.addSubview(visualEffectView)
+        
         if player.playing {
-            println(currentIndex)
-            println(index)
+            println(player.currentTime().value)
             if index == currentIndex {
                 self.songs = currentSongs
                 initSong(currentIndex)
@@ -92,12 +95,11 @@ class PlayerViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 
         initSong(index)
 
     }
-
+    
     func setGlobals() {
         currentSongs = []
         currentIndex = self.index
@@ -109,8 +111,8 @@ class PlayerViewController: UIViewController {
     }
     
     func update() {
-        progressView.setProgress(self.counter, animated: true)
-        self.counter += 0.003
+        self.progressView.setProgress(self.counter, animated: true)
+        self.counter += 0.001
     }
     
     func goToNext() {
@@ -130,6 +132,12 @@ class PlayerViewController: UIViewController {
         var url = NSURL(string: self.songs[index].bigUrl)
         var imgData = NSData(contentsOfURL: url!)
         self.imageView.image = UIImage(data: imgData!)
+        self.centerImage.image = UIImage(data: imgData!)
+        self.timer.invalidate()
+        self.progressView.setProgress(0.0, animated: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        self.timer.fire()
+        
     }
 
     @IBAction func playPrevious(sender: AnyObject) {
