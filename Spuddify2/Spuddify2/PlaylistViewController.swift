@@ -48,9 +48,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func updateGlobalIndex() {
-        println("updating index.. from \(currentIndex)")
         if currentIndex != currentSongs.count - 1 { currentIndex++ }
-        println("now im \(currentIndex)")
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,14 +113,27 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         if editingStyle == UITableViewCellEditingStyle.Delete {
             dataHandler.deleteSongFromCore(self.songs[indexPath.row])
 
+            var tempSong = self.songs[indexPath.row] as Song
+            var tempURL = NSURL(string: tempSong.previewUrl)
+            var tempItem = AVPlayerItem(URL: tempURL)!
+            
+            for x in player.items() {
+                var asset: AVAsset = x.asset
+                var urlAsset = asset as AVURLAsset
+                if tempURL == urlAsset.URL {
+                    player.removeItem(x as AVPlayerItem)
+                }
+            }
+            
             self.songs.removeAtIndex(indexPath.row)
+
+            currentSongs = self.songs
             
             if self.songs.count == 0 {
                 self.tableView.hidden = true
             }
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
-            var context:NSManagedObjectContext = appDel.managedObjectContext!
         }
     }
     
@@ -136,6 +147,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
 
     func userAddedNewSong(song: Song) {
         self.songs.append(song)
+        player.insertItem(AVPlayerItem(URL: NSURL(string: song.previewUrl)), afterItem: nil)
+        currentSongs = self.songs
         self.tableView.hidden = false
 
     }
