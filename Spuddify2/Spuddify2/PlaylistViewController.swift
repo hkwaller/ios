@@ -19,6 +19,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var barButtonPlayer: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -27,11 +28,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         self.songs = dataHandler.getCoreData(appDel)
         
         if songs.count == 0 { self.tableView.hidden = true }
-
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Getting songs again")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl)
         
         searchButton.layer.cornerRadius = 30;
         
@@ -39,8 +35,24 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGlobalIndex", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+
     }
-        
+    
+    override func viewDidAppear(animated: Bool) {
+        if player.playing {
+            barButtonPlayer.enabled = true
+        } else {
+            barButtonPlayer.enabled = false
+        }
+    }
+    
+    func updateGlobalIndex() {
+        println("updating index.. from \(currentIndex)")
+        if currentIndex != currentSongs.count - 1 { currentIndex++ }
+        println("now im \(currentIndex)")
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count;
     }
@@ -86,6 +98,10 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    @IBAction func toPlayerWithButton(sender: AnyObject) {
+        self.performSegueWithIdentifier("toPlayerWithButton", sender: self)
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if Reachability.isConnectedToNetwork() {
             self.performSegueWithIdentifier("goToPlayer", sender:self)
@@ -117,12 +133,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             cell.layer.transform = CATransform3DMakeScale(1, 1, 2)
         })
     }
-    
-    func refresh(sender:AnyObject) {
-        self.songs = []
-        self.songs = self.dataHandler.getCoreData(self.appDel)
-        self.refreshControl.endRefreshing()
-    }
 
     func userAddedNewSong(song: Song) {
         self.songs.append(song)
@@ -132,13 +142,20 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToPlayer" {
-            let playerController = segue.destinationViewController as PlayerViewController
-            let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
-            playerController.songs = self.songs
-            playerController.index = indexPath.row
+            if let playerController = segue.destinationViewController as? PlayerViewController {
+                let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
+                playerController.songs = self.songs
+                playerController.index = indexPath.row
+            }
         } else if segue.identifier == "goToSearch" {
-            let searchVC: SearchViewController = segue.destinationViewController as SearchViewController
-            searchVC.delegate = self
+            if let searchVC: SearchViewController = segue.destinationViewController as? SearchViewController {
+                searchVC.delegate = self
+            }
+        } else if segue.identifier == "toPlayerWithButton" {
+            if let playerController = segue.destinationViewController as? PlayerViewController {
+                playerController.songs = currentSongs
+                playerController.index = currentIndex
+            }
         }
     }
     

@@ -10,6 +10,7 @@
 import UIKit
 import CoreData
 import QuartzCore
+import AVFoundation
 
 protocol ShareDataDelegate {
     func userAddedNewSong(song: Song)
@@ -30,12 +31,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         navigationItem.title = "Search"
-
+        
         self.searchText.delegate = self;
 
         if songs.count == 0 {
             tableView.hidden = true
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGlobalIndex", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+   
+    }
+
+    func updateGlobalIndex() {
+        println("updating index.. from \(currentIndex)")
+        if currentIndex != currentSongs.count - 1 { currentIndex++ }
     }
 
     @IBAction func search(sender: AnyObject) {

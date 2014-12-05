@@ -96,10 +96,19 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Spuddify" id="vLm-zo-aNZ"/>
+                    <navigationItem key="navigationItem" title="Spuddify" id="vLm-zo-aNZ">
+                        <barButtonItem key="rightBarButtonItem" title="Player" id="pHp-P0-azI">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="toPlayerWithButton:" destination="yGq-Pn-rR8" id="7Vo-YY-egF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="barButtonPlayer" destination="pHp-P0-azI" id="Id4-8U-ecr"/>
                         <outlet property="searchButton" destination="S7p-m1-tGq" id="f19-EL-yeS"/>
                         <outlet property="tableView" destination="Wwj-Xp-ngX" id="13x-Eu-MW7"/>
+                        <segue destination="hTe-kT-u1i" kind="show" identifier="toPlayerWithButton" id="c3c-TN-26p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gzv-SD-FY2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -399,6 +408,9 @@
     </scenes>
     <resources>
         <image name="pointToSearch" width="610" height="512"/>
-        <image name="search" width="30" height="30"/>
+        <image name="search" width="20" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="c3c-TN-26p"/>
+    </inferredMetricsTieBreakers>
 </document>

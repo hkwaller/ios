@@ -20,6 +20,8 @@ extension AVQueuePlayer {
 }
 
 var player: AVQueuePlayer = AVQueuePlayer()
+var currentIndex: Int = 0
+var currentSongs: [Song] = [Song]()
 
 class PlayerViewController: UIViewController {
     var index: Int = 0
@@ -69,9 +71,24 @@ class PlayerViewController: UIViewController {
             items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
-        player = AVQueuePlayer(items: items)
-        player.play()
-
+        if player.playing {
+            println(currentIndex)
+            println(index)
+            if index == currentIndex {
+                self.songs = currentSongs
+                initSong(currentIndex)
+            } else {
+                initSong(index)
+                self.songs = songs
+                player = AVQueuePlayer(items: items)
+                player.play()
+            }
+        } else {
+            player = AVQueuePlayer(items: items)
+            player.play()
+            setGlobals()
+            initSong(index)
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
@@ -79,6 +96,12 @@ class PlayerViewController: UIViewController {
 
         initSong(index)
 
+    }
+
+    func setGlobals() {
+        currentSongs = []
+        currentIndex = self.index
+        currentSongs = self.songs
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -119,6 +142,7 @@ class PlayerViewController: UIViewController {
             self.items.append(AVPlayerItem(URL: NSURL(string: str!)))
         }
         
+        setGlobals()
         player = AVQueuePlayer(items: items)
         initSong(self.index)
         player.play()
@@ -138,6 +162,7 @@ class PlayerViewController: UIViewController {
         if self.index + 1 == self.playlist?.songs.count { return }
         player.advanceToNextItem()
         self.index++
+        setGlobals()
         initSong(self.index)
     }
     
