@@ -49,7 +49,7 @@ class PlayerViewController: UIViewController {
         forwards.layer.borderWidth = 2.0
         forwards.layer.borderColor = UIColor.blackColor().CGColor
         
-        
+        navigationItem.title = "Player"
         var songs = self.songs
         var index = self.index
         playlist = Playlist(index: index, songs: songs)

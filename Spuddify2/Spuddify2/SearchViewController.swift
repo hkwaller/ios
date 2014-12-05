@@ -29,7 +29,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         var nib = UINib(nibName: "PlayCellTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
-        
+        navigationItem.title = "Search"
+
         self.searchText.delegate = self;
 
         if songs.count == 0 {
@@ -38,27 +39,39 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func search(sender: AnyObject) {
-        var track:String = searchText.text
-        self.songs = []
-        if (countElements(track) == 0) { return }
         
-        let loadingView = getLoadingView()
-        view.addSubview(loadingView)
-        self.searchInfo.hidden = true
-        self.tableView.reloadData()
-        
-        self.searchText.endEditing(true)
+        if Reachability.isConnectedToNetwork() {
+            var track:String = self.searchText.text
+            self.songs = []
+            if (countElements(track) == 0) { return }
+            
+            let loadingView = getLoadingView()
+            view.addSubview(loadingView)
+            self.searchInfo.hidden = true
+            self.tableView.reloadData()
+            
+            self.searchText.endEditing(true)
+            
+            track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
 
-        track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
-
-        dataHandler.fetchJSON(track, completion: { (data, error) -> () in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.songs = data!
-                self.tableView.hidden = false;
-                self.tableView.reloadData()
-                loadingView.removeFromSuperview()
-            }
-        })
+            dataHandler.fetchJSON(track, completion: { (data, error) -> () in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if data!.count == 0 {
+                        let alert = SCLAlertView()
+                        alert.showInfo("No results", subTitle: "We didn't find any results for \"\(self.searchText.text)\", try again", closeButtonTitle: "OK", duration: 3.0)
+                    } else {
+                        self.navigationItem.title = "\(data!.count) results"
+                        self.songs = data!
+                        self.tableView.hidden = false;
+                        self.tableView.reloadData()
+                    }
+                    loadingView.removeFromSuperview()
+                }
+            })
+        } else {
+            let alert = SCLAlertView()
+            alert.showWarning("No internet connection", subTitle: "Please connect to the internet", closeButtonTitle: "OK", duration: 3.0)
+        }
     }
     
     
@@ -162,18 +175,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         loadingView.backgroundColor = UIColor(red: 189/255.0, green: 195/255.0, blue: 199/255.0, alpha: 0.9)
         
-        var label = UILabel(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+        let label = UILabel(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
         
         label.center = CGPointMake(screenSize.width / 2, screenSize.height / 2)
         label.textAlignment = NSTextAlignment.Center
         label.textColor = UIColor.whiteColor()
-        label.text = "Loading up some stuff for you, hang tight!"
+        label.text = "Loading some stuff for you, hang tight!"
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.center = CGPointMake(screenSize.width / 2, screenSize.height / 2 - 50)
+        activityIndicator.startAnimating()
+        
+        loadingView.addSubview(activityIndicator)
+        
+        label.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
+        
+        UIView.animateWithDuration(0.3, animations: {
+            label.layer.transform = CATransform3DMakeScale(1, 1, 2)
+        })
         
         loadingView.addSubview(label)
         
         return loadingView
     }
-    
     /*
     // MARK: - Navigation
 

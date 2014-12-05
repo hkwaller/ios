@@ -87,7 +87,12 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("goToPlayer", sender:self)
+        if Reachability.isConnectedToNetwork() {
+            self.performSegueWithIdentifier("goToPlayer", sender:self)
+        } else {
+            let alert = SCLAlertView()
+            alert.showWarning("No internet connection", subTitle: "Please connect to the internet", closeButtonTitle: "OK", duration: 3.0)
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -100,7 +105,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
                 self.tableView.hidden = true
             }
             
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
             var context:NSManagedObjectContext = appDel.managedObjectContext!
         }
     }
@@ -141,6 +146,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
 
 
 }
