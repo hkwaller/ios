@@ -46,16 +46,6 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backwards.layer.cornerRadius = 35;
-        forwards.layer.cornerRadius = 35;
-        playButton.layer.cornerRadius = 35;
-        
-        playButton.layer.borderWidth = 2.0
-        playButton.layer.borderColor = UIColor.blackColor().CGColor
-        backwards.layer.borderWidth = 2.0
-        backwards.layer.borderColor = UIColor.blackColor().CGColor
-        forwards.layer.borderWidth = 2.0
-        forwards.layer.borderColor = UIColor.blackColor().CGColor
         
         navigationItem.title = "Player"
         var songs = self.songs
@@ -95,9 +85,23 @@ class PlayerViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-
+        initButtons()
         initSong(index)
 
+    }
+    
+    func initButtons() {
+        backwards.layer.cornerRadius = 35;
+        forwards.layer.cornerRadius = 35;
+        playButton.layer.cornerRadius = 35;
+        
+        playButton.layer.borderWidth = 2.0
+        playButton.layer.borderColor = UIColor.blackColor().CGColor
+        backwards.layer.borderWidth = 2.0
+        backwards.layer.borderColor = UIColor.blackColor().CGColor
+        forwards.layer.borderWidth = 2.0
+        forwards.layer.borderColor = UIColor.blackColor().CGColor
+        
     }
     
     func setGlobals() {

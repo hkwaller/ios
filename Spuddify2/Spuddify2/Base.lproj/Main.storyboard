@@ -73,28 +73,16 @@
                         <color key="tintColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LGL-EH-xip" firstAttribute="top" secondItem="i3I-dC-WlB" secondAttribute="bottom" constant="20" id="8ec-hK-WLU"/>
-                            <constraint firstItem="Wwj-Xp-ngX" firstAttribute="trailing" secondItem="AIj-Xs-wYX" secondAttribute="trailingMargin" constant="-16" id="9uX-Mf-3bc"/>
                             <constraint firstAttribute="centerY" secondItem="llJ-Nj-xQv" secondAttribute="centerY" id="I12-9v-zXA"/>
                             <constraint firstItem="LGL-EH-xip" firstAttribute="top" secondItem="Wwj-Xp-ngX" secondAttribute="bottom" constant="-64" id="OWA-ne-g1g"/>
-                            <constraint firstItem="Wwj-Xp-ngX" firstAttribute="leading" secondItem="AIj-Xs-wYX" secondAttribute="leadingMargin" constant="-16" id="VqU-UG-1NK"/>
                             <constraint firstAttribute="centerX" secondItem="llJ-Nj-xQv" secondAttribute="centerX" id="cOW-OT-b9c"/>
                             <constraint firstItem="Wwj-Xp-ngX" firstAttribute="top" secondItem="AIj-Xs-wYX" secondAttribute="topMargin" constant="64" id="eFY-De-vzL"/>
                             <constraint firstItem="LGL-EH-xip" firstAttribute="top" secondItem="S7p-m1-tGq" secondAttribute="bottom" constant="20" id="etd-zp-hAz"/>
-                            <constraint firstItem="Wwj-Xp-ngX" firstAttribute="leading" secondItem="AIj-Xs-wYX" secondAttribute="leadingMargin" id="gWY-eJ-9et"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Wwj-Xp-ngX" secondAttribute="trailing" id="j23-Fp-7K9"/>
                             <constraint firstItem="S7p-m1-tGq" firstAttribute="leading" secondItem="i3I-dC-WlB" secondAttribute="trailing" constant="20" id="k6l-pf-8p6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="S7p-m1-tGq" secondAttribute="trailing" id="nuK-tV-11f"/>
                             <constraint firstItem="Wwj-Xp-ngX" firstAttribute="trailing" secondItem="AIj-Xs-wYX" secondAttribute="trailingMargin" constant="16" id="ryZ-OH-g72"/>
                             <constraint firstItem="Wwj-Xp-ngX" firstAttribute="leading" secondItem="AIj-Xs-wYX" secondAttribute="leadingMargin" constant="-16" id="sab-oc-gxf"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9uX-Mf-3bc"/>
-                                <exclude reference="VqU-UG-1NK"/>
-                                <exclude reference="gWY-eJ-9et"/>
-                                <exclude reference="j23-Fp-7K9"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Spuddify" id="vLm-zo-aNZ">
                         <barButtonItem key="rightBarButtonItem" title="Player" id="pHp-P0-azI">
@@ -179,13 +167,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="baH-Pc-y8H" firstAttribute="top" secondItem="sPY-qh-ol1" secondAttribute="bottom" constant="289" id="0Ji-mO-838"/>
                             <constraint firstAttribute="bottomMargin" secondItem="RNi-VX-V61" secondAttribute="bottom" constant="-50" id="4u8-6a-HN9"/>
-                            <constraint firstItem="8qQ-NC-0eZ" firstAttribute="bottom" secondItem="134-Vd-nR1" secondAttribute="bottom" id="8k8-t8-vi6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8qQ-NC-0eZ" secondAttribute="trailing" constant="84" id="9ed-zD-2Cv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RNi-VX-V61" secondAttribute="trailing" constant="-16" id="Bsi-SV-D6F"/>
                             <constraint firstItem="8qQ-NC-0eZ" firstAttribute="leading" secondItem="RNi-VX-V61" secondAttribute="leading" constant="20" id="Cje-yX-gMQ"/>
-                            <constraint firstItem="134-Vd-nR1" firstAttribute="trailing" secondItem="RNi-VX-V61" secondAttribute="trailing" id="IRg-QT-4UN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="134-Vd-nR1" secondAttribute="trailing" constant="-16" id="HA6-Kh-UkO"/>
                             <constraint firstItem="RNi-VX-V61" firstAttribute="top" secondItem="8qQ-NC-0eZ" secondAttribute="bottom" id="Vqa-OH-lhn"/>
                             <constraint firstAttribute="centerX" secondItem="sPY-qh-ol1" secondAttribute="centerX" id="XIP-4H-vSQ"/>
                             <constraint firstItem="RNi-VX-V61" firstAttribute="leading" secondItem="KcS-c6-U30" secondAttribute="leadingMargin" constant="-16" id="XdZ-RK-COV"/>
@@ -194,11 +180,6 @@
                             <constraint firstItem="RNi-VX-V61" firstAttribute="top" secondItem="f6T-ae-ff6" secondAttribute="bottom" constant="50" id="mtz-lN-3zM"/>
                             <constraint firstItem="sPY-qh-ol1" firstAttribute="centerY" secondItem="KcS-c6-U30" secondAttribute="centerY" id="r2e-75-Wnt"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="0Ji-mO-838"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="searchInfo" destination="sPY-qh-ol1" id="Xcl-c3-t7H"/>
@@ -315,7 +296,6 @@
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="G7b-cR-rQC" secondAttribute="centerX" id="1gY-sV-cl4"/>
                                     <constraint firstItem="G7b-cR-rQC" firstAttribute="top" secondItem="nMS-bH-qQq" secondAttribute="top" id="1vv-8Y-5Zf"/>
-                                    <constraint firstAttribute="trailing" secondItem="G7b-cR-rQC" secondAttribute="trailing" constant="-2" id="56d-mp-sng"/>
                                     <constraint firstAttribute="bottom" secondItem="0yv-fk-7O7" secondAttribute="bottom" constant="12" id="6cC-Qo-O9a"/>
                                     <constraint firstAttribute="bottom" secondItem="HQg-2G-Tow" secondAttribute="bottom" constant="83" id="7dc-8G-xVm"/>
                                     <constraint firstItem="0yv-fk-7O7" firstAttribute="leading" secondItem="iZp-Ta-FwW" secondAttribute="trailing" constant="8" id="8B6-yx-vXs"/>
@@ -333,24 +313,14 @@
                                     <constraint firstAttribute="height" constant="253" id="ikq-HT-OWw"/>
                                     <constraint firstItem="G7b-cR-rQC" firstAttribute="leading" secondItem="nMS-bH-qQq" secondAttribute="leading" id="ndr-5K-hK3"/>
                                     <constraint firstAttribute="centerX" secondItem="jKa-bI-g8o" secondAttribute="centerX" id="p6l-ea-tyX"/>
-                                    <constraint firstItem="G7b-cR-rQC" firstAttribute="leading" secondItem="nMS-bH-qQq" secondAttribute="leading" id="w9P-oC-B5W"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="56d-mp-sng"/>
-                                        <exclude reference="w9P-oC-B5W"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="piZ-pQ-h9W" firstAttribute="top" secondItem="nMS-bH-qQq" secondAttribute="bottom" id="7Tf-8O-GgB"/>
-                            <constraint firstItem="piZ-pQ-h9W" firstAttribute="top" secondItem="nMS-bH-qQq" secondAttribute="bottom" id="C7Z-Kv-UnG"/>
                             <constraint firstItem="nMS-bH-qQq" firstAttribute="top" secondItem="oRO-Wo-wPQ" secondAttribute="bottom" id="CuR-Wk-SVQ"/>
                             <constraint firstAttribute="centerY" secondItem="AsT-F6-8KK" secondAttribute="centerY" id="Ee3-ui-txc"/>
                             <constraint firstAttribute="centerX" secondItem="AsT-F6-8KK" secondAttribute="centerX" id="ErR-Ej-BPb"/>
-                            <constraint firstItem="oRO-Wo-wPQ" firstAttribute="top" secondItem="4TR-8Y-lIL" secondAttribute="bottom" constant="49" id="Pf5-or-uXY"/>
                             <constraint firstItem="AsT-F6-8KK" firstAttribute="leading" secondItem="QLX-sO-d6d" secondAttribute="leadingMargin" constant="-17" id="UZD-F8-99D"/>
                             <constraint firstItem="AsT-F6-8KK" firstAttribute="top" secondItem="QLX-sO-d6d" secondAttribute="topMargin" constant="-1" id="alN-Mr-FTO"/>
                             <constraint firstAttribute="centerX" secondItem="oRO-Wo-wPQ" secondAttribute="centerX" id="amM-bX-g7G"/>
@@ -361,13 +331,6 @@
                             <constraint firstItem="nMS-bH-qQq" firstAttribute="leading" secondItem="QLX-sO-d6d" secondAttribute="leadingMargin" constant="-16" id="xcY-17-Xod"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AsT-F6-8KK" secondAttribute="trailing" constant="-17" id="yxQ-hc-aW4"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Pf5-or-uXY"/>
-                                <exclude reference="7Tf-8O-GgB"/>
-                                <exclude reference="C7Z-Kv-UnG"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>

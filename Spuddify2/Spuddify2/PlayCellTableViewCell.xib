@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="cCk-OE-iQg">
-                        <rect key="frame" x="291" y="25" width="20" height="20"/>
+                        <rect key="frame" x="282" y="25" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="Wup-LJ-opp"/>
                             <constraint firstAttribute="height" constant="20" id="fpc-ba-2nG"/>
@@ -44,7 +44,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="cCk-OE-iQg" secondAttribute="trailing" constant="1" id="3Yo-Gp-yPX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="cCk-OE-iQg" secondAttribute="trailing" constant="10" id="3Yo-Gp-yPX"/>
                     <constraint firstItem="7cS-Fr-g8p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="7sH-Fv-6ja"/>
                     <constraint firstItem="7cS-Fr-g8p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Xdl-eY-F0b"/>
                     <constraint firstAttribute="centerY" secondItem="cCk-OE-iQg" secondAttribute="centerY" id="jTu-5a-0dx"/>

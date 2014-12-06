@@ -100,7 +100,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         TypeOfRightButton.Search
         cell.loadItem(s: song, type: .Search)
-        
+
         let urlString = song.imgUrl as String
         var image = self.imageCache[urlString]
         
