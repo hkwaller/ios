@@ -43,7 +43,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func updateGlobalIndex() {
-        println("updating index.. from \(currentIndex)")
         if currentIndex != currentSongs.count - 1 { currentIndex++ }
     }
 

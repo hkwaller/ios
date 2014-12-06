@@ -39,16 +39,24 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         if player.playing {
             barButtonPlayer.enabled = true
         } else {
             barButtonPlayer.enabled = false
         }
+        updateRow()
+    }
+    
+    func updateRow() {
+        var index: NSIndexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+        self.tableView.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.None)
+        
     }
     
     func updateGlobalIndex() {
         if currentIndex != currentSongs.count - 1 { currentIndex++ }
+        updateRow()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,6 +115,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             let alert = SCLAlertView()
             alert.showWarning("No internet connection", subTitle: "Please connect to the internet", closeButtonTitle: "OK", duration: 3.0)
         }
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -130,7 +139,17 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             currentSongs = self.songs
             
             if self.songs.count == 0 {
-                self.tableView.hidden = true
+                
+                UIView.animateWithDuration(0.5, delay: 0.0, options: nil, animations: { () -> Void in
+
+                    self.tableView.layer.transform = CATransform3DMakeTranslation(-1000.0, 0, 0)
+                    }, completion: { (value: Bool) -> Void in
+                    self.tableView.layer.transform = CATransform3DMakeTranslation(0, 0, 0)
+                    self.tableView.hidden = true
+                    player.pause()
+                    self.barButtonPlayer.enabled = false
+                })
+                
             }
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)

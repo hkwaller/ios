@@ -30,6 +30,7 @@ class PlayerViewController: UIViewController {
     var items:[AVPlayerItem] = []
     var playlist: Playlist?
     var timer: NSTimer = NSTimer()
+    var timeObserver: AnyObject?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var albumLabel: UILabel!
@@ -66,7 +67,6 @@ class PlayerViewController: UIViewController {
         imageView.addSubview(visualEffectView)
         
         if player.playing {
-            println(player.currentTime().value)
             if index == currentIndex {
                 self.songs = currentSongs
                 initSong(currentIndex)
@@ -84,6 +84,11 @@ class PlayerViewController: UIViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
+        var interval: CMTime = CMTimeMake(1, 30)
+        self.timeObserver = player.addPeriodicTimeObserverForInterval(interval, queue: nil) { (time: CMTime) -> Void in
+            self.update()
+        }
         
         initButtons()
         initSong(index)
@@ -103,7 +108,6 @@ class PlayerViewController: UIViewController {
         backwards.layer.borderColor = UIColor.blackColor().CGColor
         forwards.layer.borderWidth = 2.0
         forwards.layer.borderColor = UIColor.blackColor().CGColor
-        
     }
     
     func setGlobals() {
@@ -117,10 +121,12 @@ class PlayerViewController: UIViewController {
     }
     
     func update() {
-        if !player.playing {
-            return
+        if (player.currentItem != nil) {
+            var item: AVPlayerItem = player.currentItem!
+            var sec = CMTimeGetSeconds(item.currentTime())
+            self.progressSlider.value = Float(sec)
         }
-        self.progressSlider.value += 0.1
+        
     }
     
     func goToNext() {
