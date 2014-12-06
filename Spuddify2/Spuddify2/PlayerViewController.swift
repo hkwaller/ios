@@ -17,6 +17,14 @@ extension AVQueuePlayer {
         }
         return false
     }
+    
+    var active: Bool {
+        if self.currentItem != nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 var player: AVQueuePlayer = AVQueuePlayer()

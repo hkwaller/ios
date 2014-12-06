@@ -40,7 +40,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(animated: Bool) {
-        if player.playing {
+        if player.active {
             barButtonPlayer.enabled = true
         } else {
             barButtonPlayer.enabled = false

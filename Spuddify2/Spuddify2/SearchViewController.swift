@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func search(sender: AnyObject) {
         
         if Reachability.isConnectedToNetwork() {
-            var track:String = self.searchText.text
+            var track: String = self.searchText.text
             self.songs = []
             if (countElements(track) == 0) { return }
             
@@ -60,7 +60,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             self.searchText.endEditing(true)
             
-            track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            track = track.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            println(track)
 
             dataHandler.fetchJSON(track, completion: { (data, error) -> () in
                 dispatch_async(dispatch_get_main_queue()) {
