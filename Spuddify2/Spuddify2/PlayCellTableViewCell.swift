@@ -33,8 +33,9 @@ class PlayCellTableViewCell: UITableViewCell {
         case .Playlist:
             rightImage.image = UIImage(named: "arrow.png")
         case .Search:
-                rightImage.image = UIImage(named: "add.png")
+            rightImage.image = UIImage(named: "add.png")
         }
+        rightImage.layer.cornerRadius = 32;
         song.text = s.title
         artist.text = s.artist
     }

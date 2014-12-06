@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,7 @@
                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-Fr-g8p">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nothing" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-Fr-g8p">
                         <rect key="frame" x="8" y="4" width="64" height="64"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="5GC-Zu-fxE"/>
@@ -45,7 +45,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="cCk-OE-iQg" secondAttribute="trailing" constant="1" id="3Yo-Gp-yPX"/>
-                    <constraint firstItem="7cS-Fr-g8p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5" id="7sH-Fv-6ja"/>
+                    <constraint firstItem="7cS-Fr-g8p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="7sH-Fv-6ja"/>
                     <constraint firstItem="7cS-Fr-g8p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Xdl-eY-F0b"/>
                     <constraint firstAttribute="centerY" secondItem="cCk-OE-iQg" secondAttribute="centerY" id="jTu-5a-0dx"/>
                 </constraints>
@@ -62,5 +62,6 @@
     </objects>
     <resources>
         <image name="add" width="40" height="40"/>
+        <image name="nothing" width="260" height="260"/>
     </resources>
 </document>

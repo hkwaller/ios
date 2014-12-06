@@ -61,7 +61,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             self.searchText.endEditing(true)
             
-            track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            track = track.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
 
             dataHandler.fetchJSON(track, completion: { (data, error) -> () in
                 dispatch_async(dispatch_get_main_queue()) {
