@@ -32,7 +32,6 @@ class PlayerViewController: UIViewController {
     var timer: NSTimer = NSTimer()
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -42,7 +41,8 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var centerImage: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var volumeView: UIView!
-
+    @IBOutlet weak var progressSlider: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,6 +95,8 @@ class PlayerViewController: UIViewController {
         forwards.layer.cornerRadius = 35;
         playButton.layer.cornerRadius = 35;
         
+        self.progressSlider.setThumbImage(UIImage(named: "thumb.png")!, forState: .Normal)
+        
         playButton.layer.borderWidth = 2.0
         playButton.layer.borderColor = UIColor.blackColor().CGColor
         backwards.layer.borderWidth = 2.0
@@ -115,8 +117,10 @@ class PlayerViewController: UIViewController {
     }
     
     func update() {
-        self.progressView.setProgress(self.counter, animated: true)
-        self.counter += 0.001
+        if !player.playing {
+            return
+        }
+        self.progressSlider.value += 0.1
     }
     
     func goToNext() {
@@ -138,9 +142,9 @@ class PlayerViewController: UIViewController {
         self.imageView.image = UIImage(data: imgData!)
         self.centerImage.image = UIImage(data: imgData!)
         self.timer.invalidate()
-        self.progressView.setProgress(0.0, animated: true)
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         self.timer.fire()
+        self.progressSlider.value = 0.0
         
     }
 
