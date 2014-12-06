@@ -51,7 +51,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if Reachability.isConnectedToNetwork() {
             var track: String = self.searchText.text
             self.songs = []
-            if (countElements(track) == 0) { return }
+            if (countElements(track) == 0) {
+                let alert = SCLAlertView()
+                alert.showError("No input", subTitle: "Unfortunately we can't search for nothing. Sorry about that.", closeButtonTitle: "OK", duration: 3.0)
+                return
+            }
             
             let loadingView = getLoadingView()
             view.addSubview(loadingView)

@@ -36,7 +36,6 @@ class PlayerViewController: UIViewController {
     var counter: Float = 0.0
     var songs:[Song] = []
     var items:[AVPlayerItem] = []
-    var playlist: Playlist?
     var timer: NSTimer = NSTimer()
     var timeObserver: AnyObject?
     
@@ -59,11 +58,10 @@ class PlayerViewController: UIViewController {
         navigationItem.title = "Player"
         var songs = self.songs
         var index = self.index
-        playlist = Playlist(index: index, songs: songs)
 
-        for var i = index; i < self.playlist?.songs.count; i++ {
-            var str = self.playlist?.songs[i].previewUrl
-            items.append(AVPlayerItem(URL: NSURL(string: str!)))
+        for var i = index; i < self.songs.count; i++ {
+            var str = self.songs[i].previewUrl
+            items.append(AVPlayerItem(URL: NSURL(string: str)))
         }
         
         var mpVol: MPVolumeView = MPVolumeView(frame: volumeView.bounds)
@@ -167,9 +165,9 @@ class PlayerViewController: UIViewController {
         self.index--
         self.items = []
         
-        for var i = self.index; i < self.playlist?.songs.count; i++ {
-            var str = self.playlist?.songs[i].previewUrl
-            self.items.append(AVPlayerItem(URL: NSURL(string: str!)))
+        for var i = self.index; i < self.songs.count; i++ {
+            var str = self.songs[i].previewUrl
+            self.items.append(AVPlayerItem(URL: NSURL(string: str)))
         }
         
         setGlobals()
@@ -189,7 +187,7 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func playNext(sender: AnyObject) {
-        if self.index + 1 == self.playlist?.songs.count { return }
+        if self.index + 1 == self.songs.count { return }
         player.advanceToNextItem()
         self.index++
         setGlobals()

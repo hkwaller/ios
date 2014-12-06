@@ -15,7 +15,6 @@
 		31621B7F1A29E86B00038C44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B7E1A29E86B00038C44 /* SearchViewController.swift */; };
 		31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B801A2A032800038C44 /* PlayerViewController.swift */; };
 		319F1B8E1A2A732500F678B6 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */; };
-		319F1B901A2A81ED00F678B6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F1B8F1A2A81ED00F678B6 /* Playlist.swift */; };
 		31AC1D6B1A2DF25900DC2CB0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */; };
 		31AC1D701A2DF25900DC2CB0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */; };
 		31AC1D721A2DF25900DC2CB0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31AC1D711A2DF25900DC2CB0 /* MainInterface.storyboard */; };
@@ -70,7 +69,6 @@
 		31621B7E1A29E86B00038C44 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		31621B801A2A032800038C44 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
-		319F1B8F1A2A81ED00F678B6 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		31AC1D501A2DE8EA00DC2CB0 /* Spuddify2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Spuddify2.entitlements; sourceTree = "<group>"; };
 		31AC1D6A1A2DF25900DC2CB0 /* SpuddifyTodayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpuddifyTodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +185,6 @@
 				31621B801A2A032800038C44 /* PlayerViewController.swift */,
 				31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */,
 				31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */,
-				319F1B8F1A2A81ED00F678B6 /* Playlist.swift */,
 				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
 				31C482221A2E265F00D4E4C2 /* Helper Classes */,
 				31621B781A29E16300038C44 /* Song.swift */,
@@ -390,7 +387,6 @@
 				31621B7D1A29E16300038C44 /* SwiftyJSON.swift in Sources */,
 				31621B7A1A29E16300038C44 /* PlayCellTableViewCell.swift in Sources */,
 				31621B7C1A29E16300038C44 /* Song.swift in Sources */,
-				319F1B901A2A81ED00F678B6 /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
