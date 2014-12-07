@@ -69,11 +69,8 @@ class PlayerViewController: UIViewController {
         } else {
             player.loadSongs(self.songs, index: index)
             initSong(index)
-            println(player.getCurrentSongs().count)
-
         }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+ 
         
         var interval: CMTime = CMTimeMake(1, 30)
         self.timeObserver = player.addPeriodicTimeObserverForInterval(interval, queue: nil) { (time: CMTime) -> Void in
@@ -81,6 +78,10 @@ class PlayerViewController: UIViewController {
         }
 
         initButtons()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
     }
     
     func initButtons() {
@@ -100,6 +101,7 @@ class PlayerViewController: UIViewController {
     
     override func viewDidDisappear(animated: Bool) {
         self.timer.invalidate()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func update() {

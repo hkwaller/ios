@@ -5,6 +5,8 @@
 //  Created by Hannes Waller on 2014-12-02.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Today extension som viser siste spilte sang i notification center
+//
 
 import UIKit
 import NotificationCenter
@@ -27,7 +29,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     func update() {
-        println("updatin yo!")
         var defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.Westerdals.SpuddifySharingDefaults")!
         var title: String = defaults.stringForKey("title")!
         var artist: String = defaults.stringForKey("artist")!

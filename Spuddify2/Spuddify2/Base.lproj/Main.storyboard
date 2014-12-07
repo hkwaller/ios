@@ -359,7 +359,6 @@
                         <outlet property="progressSlider" destination="WNX-GT-oCT" id="JLp-Pv-223"/>
                         <outlet property="titleLabel" destination="Hwn-IF-utg" id="Zfd-6Y-2IT"/>
                         <outlet property="volumeView" destination="HQg-2G-Tow" id="inL-Nd-D3j"/>
-                        <segue destination="yGq-Pn-rR8" kind="show" identifier="backSegue" id="WQO-bN-tHD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gmj-LP-hza" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -390,7 +389,6 @@
         <image name="search" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WQO-bN-tHD"/>
         <segue reference="c3c-TN-26p"/>
     </inferredMetricsTieBreakers>
 </document>

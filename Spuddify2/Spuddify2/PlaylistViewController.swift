@@ -37,11 +37,17 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRow", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        println("dsiaio")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRow", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
         if player.active {
             barButtonPlayer.enabled = true
         } else {
@@ -49,6 +55,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         }
         updateRow()
     }
+    
     
     func updateRow() {
         var index: NSIndexPath = NSIndexPath(forRow: player.getCurrentIndex(), inSection: 0)
@@ -184,7 +191,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

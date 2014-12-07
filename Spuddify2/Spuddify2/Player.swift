@@ -34,7 +34,6 @@ class Player : AVQueuePlayer {
         }
     }
     
-    
     override init() {
         super.init()
         self.currentIndex = 0
