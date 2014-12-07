@@ -5,6 +5,9 @@
 //  Created by Hannes Waller on 2014-12-01.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Denne klassen tar seg av henting og sletting av coreData og henting av JSON fra Spotifys web API
+//
+//
 
 import Foundation
 import CoreData

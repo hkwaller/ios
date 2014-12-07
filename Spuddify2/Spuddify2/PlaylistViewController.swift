@@ -5,6 +5,8 @@
 //  Created by Hannes Waller on 2014-11-24.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Her vises spillelisten. Mulighet for å slette sanger, samt gå til søk eller avspilling
+//
 
 import UIKit
 import CoreData
@@ -35,8 +37,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGlobalIndex", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRow", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,14 +51,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func updateRow() {
-        var index: NSIndexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+        var index: NSIndexPath = NSIndexPath(forRow: player.getCurrentIndex(), inSection: 0)
         self.tableView.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.None)
-        
-    }
-    
-    func updateGlobalIndex() {
-        if currentIndex != currentSongs.count - 1 { currentIndex++ }
-        updateRow()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,7 +96,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             })
         }
         
-        
         return cell
     }
     
@@ -120,23 +115,19 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
+            
             dataHandler.deleteSongFromCore(self.songs[indexPath.row])
 
-            var tempSong = self.songs[indexPath.row] as Song
-            var tempURL = NSURL(string: tempSong.previewUrl)
-            var tempItem = AVPlayerItem(URL: tempURL)!
-            
-            for x in player.items() {
-                var asset: AVAsset = x.asset
-                var urlAsset = asset as AVURLAsset
-                if tempURL == urlAsset.URL {
-                    player.removeItem(x as AVPlayerItem)
-                }
-            }
-            
+            player.deleteSong(indexPath.row)
+
             self.songs.removeAtIndex(indexPath.row)
 
-            currentSongs = self.songs
+            
+            if indexPath.row - 1 == player.getCurrentIndex() {
+                self.barButtonPlayer.enabled = false
+            }
+            
+            updateRow()
             
             if self.songs.count == 0 {
                 
@@ -166,8 +157,9 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
 
     func userAddedNewSong(song: Song) {
         self.songs.append(song)
-        player.insertItem(AVPlayerItem(URL: NSURL(string: song.previewUrl)), afterItem: nil)
-        currentSongs = self.songs
+        if player.active {
+            player.addedSong(song)
+        }
         self.tableView.hidden = false
 
     }
@@ -185,8 +177,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             }
         } else if segue.identifier == "toPlayerWithButton" {
             if let playerController = segue.destinationViewController as? PlayerViewController {
-                playerController.songs = currentSongs
-                playerController.index = currentIndex
+                playerController.index = player.getCurrentIndex()
             }
         }
     }

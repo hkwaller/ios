@@ -5,31 +5,18 @@
 //  Created by Hannes Waller on 2014-11-29.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Denne klassen initierer spiller viewet og sørger for at brukeren kan bytte låter og pause
+//
+//  Merk at det ligger en MPVolumeView for kontroll av volum, denne vil ikke dukke opp i simulatoren, men 
+//  kun hvis du kjører appen på telefonen
+//
 
 import UIKit
 import AVFoundation
 import MediaPlayer
 
-extension AVQueuePlayer {
-    var playing: Bool {
-        if self.rate > 0.1 {
-            return true
-        }
-        return false
-    }
-    
-    var active: Bool {
-        if self.currentItem != nil {
-            return true
-        } else {
-            return false
-        }
-    }
-}
 
-var player: AVQueuePlayer = AVQueuePlayer()
-var currentIndex: Int = 0
-var currentSongs: [Song] = [Song]()
+var player: Player = Player()
 
 class PlayerViewController: UIViewController {
     var index: Int = 0
@@ -53,40 +40,37 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+                
         navigationItem.title = "Player"
+        
         var songs = self.songs
         var index = self.index
-
-        for var i = index; i < self.songs.count; i++ {
-            var str = self.songs[i].previewUrl
-            items.append(AVPlayerItem(URL: NSURL(string: str)))
+        
+        if songs.count == 0 {
+            self.songs = player.getCurrentSongs()
         }
         
         var mpVol: MPVolumeView = MPVolumeView(frame: volumeView.bounds)
         volumeView.addSubview(mpVol)
         
-        
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
         visualEffectView.frame = imageView.bounds
         imageView.addSubview(visualEffectView)
         
+        
         if player.playing {
-            if index == currentIndex {
-                self.songs = currentSongs
-                initSong(currentIndex)
+            if index == player.getCurrentIndex() {
+                self.songs = player.getCurrentSongs()
+                initSong(player.getCurrentIndex())
             } else {
                 initSong(index)
-                self.songs = songs
-                player = AVQueuePlayer(items: items)
-                player.play()
+                player.loadSongs(self.songs, index: index)
             }
         } else {
-            player = AVQueuePlayer(items: items)
-            player.play()
-            setGlobals()
+            player.loadSongs(self.songs, index: index)
             initSong(index)
+            println(player.getCurrentSongs().count)
+
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
@@ -95,10 +79,8 @@ class PlayerViewController: UIViewController {
         self.timeObserver = player.addPeriodicTimeObserverForInterval(interval, queue: nil) { (time: CMTime) -> Void in
             self.update()
         }
-        
-        initButtons()
-        initSong(index)
 
+        initButtons()
     }
     
     func initButtons() {
@@ -116,27 +98,19 @@ class PlayerViewController: UIViewController {
         forwards.layer.borderColor = UIColor.blackColor().CGColor
     }
     
-    func setGlobals() {
-        currentSongs = []
-        currentIndex = self.index
-        currentSongs = self.songs
-    }
-    
     override func viewDidDisappear(animated: Bool) {
         self.timer.invalidate()
     }
     
     func update() {
-        if (player.currentItem != nil) {
-            var item: AVPlayerItem = player.currentItem!
+        if player.player.currentItem != nil {
+            var item: AVPlayerItem = player.getCurrentItem()
             var sec = CMTimeGetSeconds(item.currentTime())
             self.progressSlider.value = Float(sec)
         }
-        
     }
     
     func goToNext() {
-        initSong(self.index)
         playNext(self)
     }
     
@@ -145,11 +119,13 @@ class PlayerViewController: UIViewController {
     }
     
     func initSong(index: Int) {
-        self.albumLabel.text = self.songs[index].album
-        self.titleLabel.text = self.songs[index].title
-        self.artistLabel.text = self.songs[index].artist
+        if player.getCurrentIndex() == player.getCurrentSongs().count { return }
+
+        self.albumLabel.text = player.getCurrentSongs()[index].album
+        self.titleLabel.text = player.getCurrentSongs()[index].title
+        self.artistLabel.text = player.getCurrentSongs()[index].artist
         setDefaults()
-        var url = NSURL(string: self.songs[index].bigUrl)
+        var url = NSURL(string: player.getCurrentSongs()[index].bigUrl)
         var imgData = NSData(contentsOfURL: url!)
         self.imageView.image = UIImage(data: imgData!)
         self.centerImage.image = UIImage(data: imgData!)
@@ -157,41 +133,25 @@ class PlayerViewController: UIViewController {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         self.timer.fire()
         self.progressSlider.value = 0.0
-        
     }
 
     @IBAction func playPrevious(sender: AnyObject) {
-        if self.index - 1 < 0 { return }
-        self.index--
-        self.items = []
-        
-        for var i = self.index; i < self.songs.count; i++ {
-            var str = self.songs[i].previewUrl
-            self.items.append(AVPlayerItem(URL: NSURL(string: str)))
-        }
-        
-        setGlobals()
-        player = AVQueuePlayer(items: items)
-        initSong(self.index)
-        player.play()
+        player.previousSong()
+        initSong(player.getCurrentIndex())
     }
 
-    @IBAction func play(sender: AnyObject) {        
-        if player.playing {
-            player.pause()
+    @IBAction func play(sender: AnyObject) {
+        player.togglePlayer()
+        if !player.playing {
             self.playButton.setTitle("play", forState: UIControlState.Normal)
         } else {
-            player.play()
             self.playButton.setTitle("||", forState: UIControlState.Normal)
         }
     }
     
     @IBAction func playNext(sender: AnyObject) {
-        if self.index + 1 == self.songs.count { return }
-        player.advanceToNextItem()
-        self.index++
-        setGlobals()
-        initSong(self.index)
+        player.nextSong()
+        initSong(player.getCurrentIndex())
     }
     
     func setDefaults() {
@@ -199,7 +159,6 @@ class PlayerViewController: UIViewController {
         sharedDefaults.setValue(self.songs[index].artist, forKey: "artist")
         sharedDefaults.setValue(self.songs[index].album, forKey: "album")
         sharedDefaults.setValue(self.songs[index].title, forKey: "title")
-
         sharedDefaults.synchronize()
     }
     

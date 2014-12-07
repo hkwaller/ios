@@ -6,6 +6,9 @@
 //  Created by Hannes Waller on 2014-11-29.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Tar seg av søkefunksjonaliteten i appen, presenterer resultater på søk og lar brukeren
+//  legge til sanger i playlisten
+//
 
 import UIKit
 import CoreData
@@ -43,7 +46,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func updateGlobalIndex() {
-        if currentIndex != currentSongs.count - 1 { currentIndex++ }
+
     }
 
     @IBAction func search(sender: AnyObject) {
@@ -65,7 +68,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.searchText.endEditing(true)
             
             track = track.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            println(track)
 
             dataHandler.fetchJSON(track, completion: { (data, error) -> () in
                 dispatch_async(dispatch_get_main_queue()) {

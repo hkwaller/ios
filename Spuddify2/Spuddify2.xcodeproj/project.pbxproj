@@ -14,6 +14,7 @@
 		31621B7D1A29E16300038C44 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B791A29E16300038C44 /* SwiftyJSON.swift */; };
 		31621B7F1A29E86B00038C44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B7E1A29E86B00038C44 /* SearchViewController.swift */; };
 		31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31621B801A2A032800038C44 /* PlayerViewController.swift */; };
+		318BC1CB1A344A4E0046745B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318BC1CA1A344A4D0046745B /* Player.swift */; };
 		319F1B8E1A2A732500F678B6 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */; };
 		31AC1D6B1A2DF25900DC2CB0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */; };
 		31AC1D701A2DF25900DC2CB0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AC1D6F1A2DF25900DC2CB0 /* TodayViewController.swift */; };
@@ -68,6 +69,7 @@
 		31621B791A29E16300038C44 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		31621B7E1A29E86B00038C44 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		31621B801A2A032800038C44 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		318BC1CA1A344A4D0046745B /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		31AC1D401A2DE73700DC2CB0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		31AC1D501A2DE8EA00DC2CB0 /* Spuddify2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Spuddify2.entitlements; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				31CA11AA1A2381F80094F96E /* Main.storyboard */,
 				31621B801A2A032800038C44 /* PlayerViewController.swift */,
 				31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */,
+				318BC1CA1A344A4D0046745B /* Player.swift */,
 				31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */,
 				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
 				31C482221A2E265F00D4E4C2 /* Helper Classes */,
@@ -380,6 +383,7 @@
 				31588C631A2C62D700EB1A02 /* DataHandler.swift in Sources */,
 				31C482211A2E262C00D4E4C2 /* Reachability.swift in Sources */,
 				31621B811A2A032800038C44 /* PlayerViewController.swift in Sources */,
+				318BC1CB1A344A4E0046745B /* Player.swift in Sources */,
 				31621B7F1A29E86B00038C44 /* SearchViewController.swift in Sources */,
 				31CA11A71A2381F80094F96E /* Spuddify2.xcdatamodeld in Sources */,
 				319F1B8E1A2A732500F678B6 /* SCLAlertView.swift in Sources */,

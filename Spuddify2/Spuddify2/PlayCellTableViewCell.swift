@@ -5,6 +5,8 @@
 //  Created by Hannes Waller on 2014-11-19.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Initierer celler til tableViews, på playlist og på søkeresultater
+//
 
 enum TypeOfRightButton {
     case Playlist
