@@ -41,7 +41,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewDidDisappear(animated: Bool) {
-        println("dsiaio")
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     

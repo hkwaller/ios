@@ -62,7 +62,7 @@ class Player : AVQueuePlayer {
     }
     
     func nextSong() {
-        if self.currentIndex == self.songs.count { return }
+        if self.currentIndex + 1 == self.songs.count { return }
         self.player.advanceToNextItem()
         self.currentIndex++
     }
@@ -147,6 +147,8 @@ class Player : AVQueuePlayer {
                 self.currentItems.append(AVPlayerItem(URL: NSURL(string: str)))
             }
             player = AVQueuePlayer(items: items())
+        } else if index < self.currentIndex {
+            self.currentIndex--
         }
         
         self.songs.removeAtIndex(index)
@@ -158,7 +160,6 @@ class Player : AVQueuePlayer {
     }
     
     func addedSong(song: Song) {
-
         var tempURL = NSURL(string: song.previewUrl)
         var item = AVPlayerItem(URL: tempURL)
         

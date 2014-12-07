@@ -5,6 +5,8 @@
 //  Created by Hannes Waller on 2014-11-21.
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
+//  Klasse for å skape sang objekter som vil bli gjenbrukt gjennom hele appen
+//
 
 import Foundation
 import UIKit

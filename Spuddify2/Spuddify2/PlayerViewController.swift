@@ -57,7 +57,6 @@ class PlayerViewController: UIViewController {
         visualEffectView.frame = imageView.bounds
         imageView.addSubview(visualEffectView)
         
-        
         if player.playing {
             if index == player.getCurrentIndex() {
                 self.songs = player.getCurrentSongs()
@@ -70,7 +69,6 @@ class PlayerViewController: UIViewController {
             player.loadSongs(self.songs, index: index)
             initSong(index)
         }
- 
         
         var interval: CMTime = CMTimeMake(1, 30)
         self.timeObserver = player.addPeriodicTimeObserverForInterval(interval, queue: nil) { (time: CMTime) -> Void in
@@ -122,7 +120,6 @@ class PlayerViewController: UIViewController {
     
     func initSong(index: Int) {
         if player.getCurrentIndex() == player.getCurrentSongs().count { return }
-
         self.albumLabel.text = player.getCurrentSongs()[index].album
         self.titleLabel.text = player.getCurrentSongs()[index].title
         self.artistLabel.text = player.getCurrentSongs()[index].artist

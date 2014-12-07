@@ -40,13 +40,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if songs.count == 0 {
             tableView.hidden = true
         }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGlobalIndex", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-   
-    }
-
-    func updateGlobalIndex() {
-
     }
 
     @IBAction func search(sender: AnyObject) {
@@ -87,11 +80,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let alert = SCLAlertView()
             alert.showWarning("No internet connection", subTitle: "Please connect to the internet", closeButtonTitle: "OK", duration: 3.0)
         }
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,7 +172,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getLoadingView() -> UIView {
-
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let loadingView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))
         
@@ -213,14 +200,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return loadingView
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
-    */
-
 }

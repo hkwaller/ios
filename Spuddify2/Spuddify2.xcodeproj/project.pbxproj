@@ -148,6 +148,9 @@
 		31C482221A2E265F00D4E4C2 /* Helper Classes */ = {
 			isa = PBXGroup;
 			children = (
+				318BC1CA1A344A4D0046745B /* Player.swift */,
+				31621B781A29E16300038C44 /* Song.swift */,
+				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
 				319F1B8D1A2A732500F678B6 /* SCLAlertView.swift */,
 				31C482201A2E262C00D4E4C2 /* Reachability.swift */,
 				31621B791A29E16300038C44 /* SwiftyJSON.swift */,
@@ -186,11 +189,8 @@
 				31CA11AA1A2381F80094F96E /* Main.storyboard */,
 				31621B801A2A032800038C44 /* PlayerViewController.swift */,
 				31621B761A29E16300038C44 /* PlayCellTableViewCell.swift */,
-				318BC1CA1A344A4D0046745B /* Player.swift */,
 				31621B771A29E16300038C44 /* PlayCellTableViewCell.xib */,
-				31588C621A2C62D700EB1A02 /* DataHandler.swift */,
 				31C482221A2E265F00D4E4C2 /* Helper Classes */,
-				31621B781A29E16300038C44 /* Song.swift */,
 				31CA11AD1A2381F80094F96E /* Images.xcassets */,
 				31CA11AF1A2381F80094F96E /* LaunchScreen.xib */,
 				31CA11A51A2381F80094F96E /* Spuddify2.xcdatamodeld */,
