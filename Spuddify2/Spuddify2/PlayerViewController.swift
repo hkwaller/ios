@@ -18,6 +18,14 @@ import MediaPlayer
 // Global player variabel som er tilgjengelig i hele appen
 var player: Player = Player()
 
+enum UIUserInterfaceIdiom : Int {
+    case Unspecified
+    
+    case Phone
+    case Pad
+}
+
+
 class PlayerViewController: UIViewController {
     var index: Int = 0
     var counter: Float = 0.0
@@ -54,9 +62,15 @@ class PlayerViewController: UIViewController {
         var mpVol: MPVolumeView = MPVolumeView(frame: volumeView.bounds)
         volumeView.addSubview(mpVol)
         
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
-        visualEffectView.frame = imageView.bounds
-        imageView.addSubview(visualEffectView)
+        // Sjekker om det er iPad eller iPhone for å gjemme blur view på pad da bilden synes bra uten den
+        // samtidig som den minste bilden blir gjemt
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+            visualEffectView.frame = imageView.frame
+            imageView.addSubview(visualEffectView)
+        } else if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.centerImage.hidden = true
+        }
         
         // Sjekker om spilleren kjører for å vite hva som skal vises i viewet
         if player.playing {
