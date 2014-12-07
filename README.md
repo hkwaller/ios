@@ -45,6 +45,6 @@ Berørte filer: 	SearchViewController.swift rad 206-210
 BIBLIOTEKER
 ---
 
-SwiftyJSON 		- 	For hantering av JSON på en god måte
-Reachability 	- 	Sjekker om internett er tilgjengelig, slik at ingen funksjoner kjøres som er beroende av            internett
-SCLAlertview	-	For å vise finere Alertviews en iOS innebyggde
+- SwiftyJSON - For hantering av JSON på en god måte
+- Reachability - Sjekker om internett er tilgjengelig, slik at ingen funksjoner kjøres som er beroende av            internett
+- SCLAlertview - For å vise finere Alertviews en iOS innebyggde
