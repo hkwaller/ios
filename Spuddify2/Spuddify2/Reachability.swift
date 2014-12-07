@@ -1,9 +1,11 @@
 //
-//  Reachability.swift
-//  Spuddify2
+//  ViewController.swift
+//  Swift-Reachability
 //
-//  Created by Chris Danielson on 2014-12-02.
-//  Copyright (c) 2014 Chris Danielson. All rights reserved.
+//  Created by Isuru Nanayakkara on 9/2/14.
+//  Copyright (c) 2014 Isuru Nanayakkara. All rights reserved.
+//
+//  https://github.com/Isuru-Nanayakkara/Swift-Reachability
 //
 
 import Foundation
