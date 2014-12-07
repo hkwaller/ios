@@ -15,7 +15,7 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-
+// Global player variabel som er tilgjengelig i hele appen
 var player: Player = Player()
 
 class PlayerViewController: UIViewController {
@@ -50,6 +50,7 @@ class PlayerViewController: UIViewController {
             self.songs = player.getCurrentSongs()
         }
         
+        // Volumeview for kontroll av volumet. Vil ikke dukke opp i simulatoren
         var mpVol: MPVolumeView = MPVolumeView(frame: volumeView.bounds)
         volumeView.addSubview(mpVol)
         
@@ -57,6 +58,7 @@ class PlayerViewController: UIViewController {
         visualEffectView.frame = imageView.bounds
         imageView.addSubview(visualEffectView)
         
+        // Sjekker om spilleren kjører for å vite hva som skal vises i viewet
         if player.playing {
             if index == player.getCurrentIndex() {
                 self.songs = player.getCurrentSongs()
@@ -70,6 +72,7 @@ class PlayerViewController: UIViewController {
             initSong(index)
         }
         
+        // Timer for visning av hvor langt en sang er kommet
         var interval: CMTime = CMTimeMake(1, 30)
         self.timeObserver = player.addPeriodicTimeObserverForInterval(interval, queue: nil) { (time: CMTime) -> Void in
             self.update()
@@ -78,10 +81,12 @@ class PlayerViewController: UIViewController {
         initButtons()
     }
     
+    // Legger til en observer for når en sang er ferdig
     override func viewWillAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToNext", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
     }
     
+    // Initierer de forskjellige knappene
     func initButtons() {
         backwards.layer.cornerRadius = 35;
         forwards.layer.cornerRadius = 35;
@@ -97,11 +102,13 @@ class PlayerViewController: UIViewController {
         forwards.layer.borderColor = UIColor.blackColor().CGColor
     }
     
+    // Inaktiverer timeren og tar vekk observern når brukeren går vekk fra viewet
     override func viewDidDisappear(animated: Bool) {
         self.timer.invalidate()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    // Funksjonen som kjøres av observern på tid, slik at progressSlidern rører på seg
     func update() {
         if player.player.currentItem != nil {
             var item: AVPlayerItem = player.getCurrentItem()
@@ -114,10 +121,7 @@ class PlayerViewController: UIViewController {
         playNext(self)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+    // Funksjon som setter visning av sang i viewet, plus initierer timeren
     func initSong(index: Int) {
         if player.getCurrentIndex() == player.getCurrentSongs().count { return }
         self.albumLabel.text = player.getCurrentSongs()[index].album
@@ -153,12 +157,18 @@ class PlayerViewController: UIViewController {
         initSong(player.getCurrentIndex())
     }
     
+    // Setter defaults for en spilt sang som vises i today-extension
     func setDefaults() {
         var sharedDefaults: NSUserDefaults = NSUserDefaults(suiteName: "group.Westerdals.SpuddifySharingDefaults")!;
         sharedDefaults.setValue(self.songs[index].artist, forKey: "artist")
         sharedDefaults.setValue(self.songs[index].album, forKey: "album")
         sharedDefaults.setValue(self.songs[index].title, forKey: "title")
         sharedDefaults.synchronize()
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
 

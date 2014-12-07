@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Hannes Waller. All rights reserved.
 //
 //  Today extension som viser siste spilte sang i notification center
+//  Lastes in fra userDefaults å oppdateres ved hjelp av en observer etter ny sang er spilt
 //
 
 import UIKit
@@ -29,6 +30,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     func update() {
+        // Henter userDefaults fra hovedappen
         var defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.Westerdals.SpuddifySharingDefaults")!
         var title: String = defaults.stringForKey("title")!
         var artist: String = defaults.stringForKey("artist")!
@@ -40,17 +42,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
         completionHandler(NCUpdateResult.NewData)
     }
     

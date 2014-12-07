@@ -15,6 +15,7 @@ import CoreData
 import QuartzCore
 import AVFoundation
 
+// delegate to send new songs to playlist
 protocol ShareDataDelegate {
     func userAddedNewSong(song: Song)
 }
@@ -41,6 +42,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.hidden = true
         }
     }
+    
+    // Search function that checks whether or not the app har connectivity, if yes then it requests the data from the datahandler
+    // and displays it.
 
     @IBAction func search(sender: AnyObject) {
         
@@ -86,6 +90,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return songs.count;
     }
     
+    
+    // Loading up each cell in the search results with caching on the images to make it more smooth
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:PlayCellTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("customCell") as PlayCellTableViewCell
@@ -129,6 +136,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    // Adding selected songs to core data and setting the new song on the delegate so it shows up on the playlist
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context:NSManagedObjectContext = appDel.managedObjectContext!
@@ -156,6 +165,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
+    // Animations for the cells that shows up when results are presented and the table is scrolled
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
         
@@ -164,6 +174,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
     }
     
+    // Binding up the return key to the search funciton and hiding the keyboard
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         search(self)
         textField.resignFirstResponder()
@@ -171,6 +182,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return true;
     }
     
+    // Loading view to prevent user from fooling around with the view while the app is getting
+    // the data from the API
     func getLoadingView() -> UIView {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let loadingView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))

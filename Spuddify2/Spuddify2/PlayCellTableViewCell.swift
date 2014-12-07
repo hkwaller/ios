@@ -30,6 +30,7 @@ class PlayCellTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // Innlastings funksjon som laster cellene, med add eller arrow som høyrebilde for det ulike typene av celler
     func loadItem(#s: Song, type: TypeOfRightButton) {
         switch type {
         case .Playlist:

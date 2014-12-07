@@ -37,13 +37,15 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.registerNib(nib, forCellReuseIdentifier: "customCell")
         
-        
     }
     
+    // Tar vekk observer når viewen forsvinner slik at det ikke blir dobbelt
     override func viewDidDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    // Legger til observer og sjekker hvis knappen til player skal være aktiv, i tillegg blir nåværende celle
+    // markert i forhold til hvilken sang som spilles
     override func viewWillAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRow", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
@@ -55,7 +57,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         updateRow()
     }
     
-    
+    // Funksjon som følger med på hvilken cell som skal markeres
     func updateRow() {
         var index: NSIndexPath = NSIndexPath(forRow: player.getCurrentIndex(), inSection: 0)
         self.tableView.selectRowAtIndexPath(index, animated: true, scrollPosition: UITableViewScrollPosition.None)
@@ -65,6 +67,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         return songs.count;
     }
     
+    // Populerer celler med samme chaching av bilder som på search viewet
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:PlayCellTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("customCell") as PlayCellTableViewCell
@@ -109,6 +112,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         self.performSegueWithIdentifier("toPlayerWithButton", sender: self)
     }
     
+    
+    // Prøver å spille av cellen som blir tappet, med en sjekk for at internet er tilgjengelig
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if Reachability.isConnectedToNetwork() {
             self.performSegueWithIdentifier("goToPlayer", sender:self)
@@ -119,6 +124,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    // Når brukeren tar bort en celle kjøres denne funksjonen som tar bort sangen fra core og fra spilleren hvis den
+    // er startet
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             
@@ -130,7 +137,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
             }
 
             self.songs.removeAtIndex(indexPath.row)
-
             
             if indexPath.row - 1 == player.getCurrentIndex() {
                 self.barButtonPlayer.enabled = false
@@ -156,6 +162,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    // Animasjon på cellene, samme som i search view
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 2)
         
@@ -164,6 +171,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
 
+    // Delegate metoden for å legge til sanger
     func userAddedNewSong(song: Song) {
         self.songs.append(song)
         if player.active {
@@ -173,6 +181,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     
+    // Funksjonalitet for de ulike seguesene
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToPlayer" {
             if let playerController = segue.destinationViewController as? PlayerViewController {
