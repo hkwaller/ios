@@ -1,5 +1,4 @@
 
-===
 SPUDDIFY
 ===
 
@@ -17,16 +16,15 @@ Den virker på iPad og iPhone å vil tilpasse seg de ulike typene.
 
 
 
-/*************************/
-* 		EXTENSION         *
-/*************************/
+
+EXTENSION
+---
 Det er laget en today extension som viser sist spilte sang, dette vises ved hjelp av UserDefaults
 
 
 
-/*************************/
-* 		ANIMASJONER       *
-/*************************/
+ANIMASJONER
+---
 
 Det er noen forskjellige animasjoner i appen.
 
@@ -43,10 +41,10 @@ Berørte filer: 	SearchViewController.swift rad 206-210
 
 
 
-/*************************/
-* 		Biblioteker       *
-/*************************/
+
+BIBLIOTEKER
+---
 
 SwiftyJSON 		- 	For hantering av JSON på en god måte
-Reachability 	- 	Sjekker om internett er tilgjengelig, slik at ingen funksjoner kjøres som er beroende av internett
+Reachability 	- 	Sjekker om internett er tilgjengelig, slik at ingen funksjoner kjøres som er beroende av            internett
 SCLAlertview	-	For å vise finere Alertviews en iOS innebyggde
