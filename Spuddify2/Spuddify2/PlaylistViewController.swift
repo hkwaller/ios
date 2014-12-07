@@ -123,8 +123,11 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         if editingStyle == UITableViewCellEditingStyle.Delete {
             
             dataHandler.deleteSongFromCore(self.songs[indexPath.row])
-
-            player.deleteSong(indexPath.row)
+            println(player)
+            
+            if player.player.currentItem != nil {
+                player.deleteSong(indexPath.row)
+            }
 
             self.songs.removeAtIndex(indexPath.row)
 
